@@ -24,6 +24,11 @@
     spy.forEach(function(a){var t=document.getElementById(a.dataset.spy);if(t)io.observe(t)});
   }
 
+  /* ---------- verification hooks for scroll-craft's screenshot tool (only with ?scverify) ---------- */
+  var SCV=/[?&]scverify/.test(location.search);
+  if(SCV){
+    $$('.sec-head h2, .sec-head p, .ph2 h1, .ph2-lede, .obj-head h2, .obj-label, .obj-text, .stack-head h2, .now h3, .now p, .cta-band h2, .cta-band p, .dates-head h3, .dates-head p, .faq2-head h2, .steps h3, .steps p, .glance-t tbody th, .glance-t td').forEach(function(el){el.setAttribute('data-sc-copy','')});
+  }
   /* ---------- sizes: the bouquet grows stem by stem as you scroll (signature) ---------- */
   // Wrap paper grows with the bouquet, and the flower head always sits on the cone.
   function posyShape(svg,n){
@@ -41,6 +46,7 @@
       blooms.forEach(function(b,i){b.classList.toggle('off',i>=n)});
       num.textContent=n>=100?'100+':n;
       posyShape(live,n);
+      if(SCV)live.closest('.posy-rail').setAttribute('data-sc-verify-state','stems:'+n);
     };
     var update=function(){
       var mid=innerHeight*.45,stems=+objs[0].dataset.stems,name=objs[0].querySelector('h2').textContent;
@@ -148,6 +154,7 @@
       gsap.set(soft,{autoAlpha:0});
       ScrollTrigger.batch(soft,{start:'top 92%',once:true,onEnter:function(b){gsap.to(b,{autoAlpha:1,duration:1,stagger:.1,ease:'power2.out',overwrite:true})}});
     }
+    if(SCV)document.documentElement.classList.add('sc-ready');
     return;
   }
   var mobile=matchMedia('(max-width:860px)').matches;
@@ -179,7 +186,7 @@
     var sizeEl=$('#stackSize'),barEl=$('#stackBar'),nm=$('#stackName'),mx=$('#stackMix'),ask=$('#stackAsk'),cur=0;
     var setActive=function(i){
       if(i===cur) return;cur=i;var s=scards[i];
-      sizeEl.textContent=s.dataset.size;
+      sizeEl.textContent=s.dataset.size;if(SCV)document.querySelector('.stack-sec').setAttribute('data-sc-verify-state','card:'+i);
       nm.textContent=s.dataset.name;mx.textContent=s.dataset.mix;
       ask.dataset.look=s.dataset.name;ask.href='order.html?look='+encodeURIComponent(s.dataset.name);
       gsap.fromTo('.now',{y:12,autoAlpha:0},{y:0,autoAlpha:1,duration:.5,ease:'power3.out',overwrite:true});
@@ -214,4 +221,9 @@
     gsap.fromTo(m,{yPercent:-5,scale:1.12},{yPercent:5,scale:1.12,ease:'none',scrollTrigger:{trigger:m.parentNode,start:'top bottom',end:'bottom top',scrub:true}});
   });
   addEventListener('load',function(){ScrollTrigger.refresh()});
+  if(SCV){
+    // acts are tagged after GSAP pins, so the pinned stack is measured on its full scroll length
+    $$('main > section').forEach(function(el){var pin=el.parentElement&&el.parentElement.classList.contains('pin-spacer');(pin?el.parentElement:el).setAttribute('data-sc-act',pin?'pin':'flow')});
+    document.documentElement.classList.add('sc-ready');
+  }
 })();
