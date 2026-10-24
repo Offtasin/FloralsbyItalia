@@ -24,11 +24,6 @@
     spy.forEach(function(a){var t=document.getElementById(a.dataset.spy);if(t)io.observe(t)});
   }
 
-  /* ---------- verification hooks for scroll-craft's screenshot tool (only with ?scverify) ---------- */
-  var SCV=/[?&]scverify/.test(location.search);
-  if(SCV){
-    $$('.sec-head h2, .sec-head p, .ph2 h1, .ph2-lede, .obj-head h2, .obj-label, .obj-text, .stack-head h2, .now h3, .now p, .cta-band h2, .cta-band p, .dates-head h3, .dates-head p, .faq2-head h2, .steps h3, .steps p, .glance-t tbody th, .glance-t td').forEach(function(el){el.setAttribute('data-sc-copy','')});
-  }
   /* ---------- sizes: the bouquet grows stem by stem as you scroll (signature) ---------- */
   // Wrap paper grows with the bouquet, and the flower head always sits on the cone.
   function posyShape(svg,n){
@@ -46,7 +41,6 @@
       blooms.forEach(function(b,i){b.classList.toggle('off',i>=n)});
       num.textContent=n>=100?'100+':n;
       posyShape(live,n);
-      if(SCV)live.closest('.posy-rail').setAttribute('data-sc-verify-state','stems:'+n);
     };
     var update=function(){
       var mid=innerHeight*.45,stems=+objs[0].dataset.stems,name=objs[0].querySelector('h2').textContent;
@@ -70,7 +64,26 @@
   var mday=function(y){var d=new Date(y,4,1);d.setDate(1+((7-d.getDay())%7)+7);return d};
   var dates={vday:nextDate(function(y){return new Date(y,1,14)}),mday:nextDate(mday)};
   $$('[data-date]').forEach(function(el){var d=dates[el.dataset.date];if(d)el.textContent=d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})});
-  $$('[data-by]').forEach(function(el){var d=dates[el.dataset.by];if(d){var b=new Date(d);b.setDate(b.getDate()-7);el.textContent=b.toLocaleDateString('en-US',{month:'short',day:'numeric'})}});
+  var bookBy=function(d){var b=new Date(d);b.setDate(b.getDate()-7);return b};
+  $$('[data-by]').forEach(function(el){var d=dates[el.dataset.by];if(d)el.textContent=bookBy(d).toLocaleDateString('en-US',{month:'short',day:'numeric'})});
+
+  /* ---------- home: holiday banner in the 6 weeks before Valentine's Day and Mother's Day ---------- */
+  var promo=$('#promo');
+  if(promo){
+    var today=new Date();today.setHours(0,0,0,0);
+    [['vday',"Valentine's Day"],['mday',"Mother's Day"]].some(function(h){
+      var day=dates[h[0]],by=bookBy(day),left=Math.round((day-today)/864e5);
+      if(left>42) return false;
+      var fmt=function(d,o){return d.toLocaleDateString('en-US',o)};
+      var when=left===0?'is today':left===1?'is tomorrow':'is '+fmt(day,{weekday:'long',month:'short',day:'numeric'});
+      var early=today<=by;
+      $('#promoText').innerHTML='<b>'+h[1]+' '+when+'.</b> '+(early?'Book by '+fmt(by,{month:'short',day:'numeric'})+', spots fill fast.':'Spots are almost gone. Text us to check.');
+      var cta=$('#promoCta');
+      if(early){cta.href='order.html?occasion='+encodeURIComponent(h[1]);cta.textContent='Book now'}
+      else{cta.href='sms:+13238420960';cta.textContent='Text us'}
+      promo.hidden=false;return true;
+    });
+  }
 
   /* ---------- "Ask for this look" carries the bouquet name to the order page ---------- */
   document.addEventListener('click',function(e){
@@ -86,6 +99,15 @@
     if(look){notes.value='I love the "'+look+'" bouquet from your site.';try{localStorage.removeItem('fbi-look')}catch(err){}}
     var sizeParam=null;try{sizeParam=new URLSearchParams(location.search).get('size')}catch(err){}
     if(sizeParam){$$('[name=size]',form).forEach(function(r){if(r.value.indexOf(sizeParam)===0)r.checked=true})}
+    var occParam=null;try{occParam=new URLSearchParams(location.search).get('occasion')}catch(err){}
+    if(occParam){$$('#occasion option').forEach(function(o){if(o.value===occParam)o.selected=true})}
+    var photo=$('#photo'),thumbs=$('#thumbs'),photos=[];
+    photo.addEventListener('change',function(){
+      photos=[].slice.call(photo.files||[]).filter(function(f){return /^image\//.test(f.type)}).slice(0,4);
+      thumbs.innerHTML='';
+      photos.forEach(function(f){var i=document.createElement('img');i.alt='';i.src=URL.createObjectURL(f);i.onload=function(){URL.revokeObjectURL(i.src)};thumbs.appendChild(i)});
+      thumbs.hidden=!photos.length;
+    });
     var date=$('#date'),t=new Date();t.setDate(t.getDate()+2);date.min=t.toISOString().slice(0,10);
     var customToggle=$('#customToggle'),customWrap=$('#customWrap');
     customToggle.addEventListener('change',function(){customWrap.classList.toggle('show',customToggle.checked);if(customToggle.checked)$('#custom').focus()});
@@ -130,10 +152,16 @@
         val('colors')?'Colors: '+val('colors'):'',
         val('ribbon')?'Ribbon: '+val('ribbon'):'',
         'Pickup or delivery: '+val('get'),
-        val('notes')?'Notes: '+val('notes'):''
+        val('notes')?'Notes: '+val('notes'):'',
+        photos.length?'Inspiration: '+(photos.length===1?"I'll attach my photo":"I'll attach "+photos.length+' photos'):''
       ].filter(Boolean).join('\n');
       sum.textContent=lines;copy(lines);
       $('#smsBtn').href='sms:+13238420960?&body='+encodeURIComponent(lines);
+      $('#photoNote').hidden=!photos.length;
+      var share=$('#shareBtn'),canShare=false;
+      try{canShare=photos.length&&navigator.canShare&&navigator.canShare({files:photos,text:lines})}catch(e){}
+      share.hidden=!canShare;
+      share.onclick=function(){navigator.share({files:photos,text:lines}).catch(function(){})};
       done.hidden=false;
       done.scrollIntoView({block:'nearest',behavior:reduce?'auto':'smooth'});
     });
@@ -154,7 +182,6 @@
       gsap.set(soft,{autoAlpha:0});
       ScrollTrigger.batch(soft,{start:'top 92%',once:true,onEnter:function(b){gsap.to(b,{autoAlpha:1,duration:1,stagger:.1,ease:'power2.out',overwrite:true})}});
     }
-    if(SCV)document.documentElement.classList.add('sc-ready');
     return;
   }
   var mobile=matchMedia('(max-width:860px)').matches;
@@ -186,7 +213,7 @@
     var sizeEl=$('#stackSize'),barEl=$('#stackBar'),nm=$('#stackName'),mx=$('#stackMix'),ask=$('#stackAsk'),cur=0;
     var setActive=function(i){
       if(i===cur) return;cur=i;var s=scards[i];
-      sizeEl.textContent=s.dataset.size;if(SCV)document.querySelector('.stack-sec').setAttribute('data-sc-verify-state','card:'+i);
+      sizeEl.textContent=s.dataset.size;
       nm.textContent=s.dataset.name;mx.textContent=s.dataset.mix;
       ask.dataset.look=s.dataset.name;ask.href='order.html?look='+encodeURIComponent(s.dataset.name);
       gsap.fromTo('.now',{y:12,autoAlpha:0},{y:0,autoAlpha:1,duration:.5,ease:'power3.out',overwrite:true});
@@ -221,9 +248,4 @@
     gsap.fromTo(m,{yPercent:-5,scale:1.12},{yPercent:5,scale:1.12,ease:'none',scrollTrigger:{trigger:m.parentNode,start:'top bottom',end:'bottom top',scrub:true}});
   });
   addEventListener('load',function(){ScrollTrigger.refresh()});
-  if(SCV){
-    // acts are tagged after GSAP pins, so the pinned stack is measured on its full scroll length
-    $$('main > section').forEach(function(el){var pin=el.parentElement&&el.parentElement.classList.contains('pin-spacer');(pin?el.parentElement:el).setAttribute('data-sc-act',pin?'pin':'flow')});
-    document.documentElement.classList.add('sc-ready');
-  }
 })();

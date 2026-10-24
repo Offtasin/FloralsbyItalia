@@ -7,7 +7,15 @@
 <meta name="description" content="Request a custom bouquet from Florals by Italia. Quotes usually within a day.">
 <meta property="og:title" content="Order | Florals by Italia">
 <meta property="og:description" content="Request a custom bouquet from Florals by Italia. Quotes usually within a day.">
-<meta property="og:image" content="https://floralsbyitalia.vercel.app/assets/img/logo-ivory-512.jpg">
+<meta property="og:image" content="https://floralsbyitalia.vercel.app/assets/img/share/order.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Florals by Italia logo next to a pink birthday bouquet of lilies and roses">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://floralsbyitalia.vercel.app/order.html">
+<meta property="og:site_name" content="Florals by Italia">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://floralsbyitalia.vercel.app/order.html">
 <meta name="theme-color" content="#FFF7FA">
 <link rel="icon" type="image/png" href="assets/img/logo-64.png">
 <link rel="apple-touch-icon" href="assets/img/logo-192.png">
@@ -56,6 +64,7 @@
       <div class="f"><label for="ribbon">Ribbon lettering <span class="hint">optional</span></label><input id="ribbon" name="ribbon" placeholder="Te Amo, Happy 21st Bella…"></div>
       <div class="f full"><label for="get">Pickup or delivery</label>
         <select id="get" name="get"><option>Pickup in East LA</option><option>Delivery</option></select></div>
+      <div class="f full"><label for="photo">Inspiration photo <span class="hint">optional, a look you love or a screenshot</span></label><input id="photo" name="photo" type="file" accept="image/*" multiple><div class="thumbs" id="thumbs" hidden></div></div>
       <div class="f full"><label for="notes">Anything else</label><textarea id="notes" name="notes" placeholder="Inspiration, delivery area, a bouquet from our site you liked…"></textarea></div>
       <p class="deposit-note"><span class="star" aria-hidden="true"></span>A 20% deposit holds your date once you approve your quote.</p>
       <p class="error" id="err" role="alert" hidden></p>
@@ -64,8 +73,10 @@
         <h3>Your request is ready</h3>
         <p style="margin:0">Send it by text or Instagram and we'll reply with your quote. We copied it for you too.</p>
         <pre id="summary"></pre>
+        <p class="photo-note" id="photoNote" hidden><span class="star" aria-hidden="true"></span><span><b>Don't forget your photo.</b> When your text or Instagram chat opens, attach your inspiration photo before you send.</span></p>
         <div style="display:flex;flex-wrap:wrap;gap:10px">
           <a class="btn btn-pink" id="smsBtn" href="sms:+13238420960">Text it to us</a>
+          <button class="btn btn-ghost" type="button" id="shareBtn" hidden>Share with photo</button>
           <a class="btn btn-ghost" href="https://ig.me/m/floralsbyitalia" target="_blank" rel="noopener">Send on Instagram</a>
           <button class="btn btn-ghost" type="button" id="copyAgain">Copy request</button>
         </div>

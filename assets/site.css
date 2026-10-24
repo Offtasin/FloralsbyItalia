@@ -514,3 +514,28 @@ input[aria-invalid="true"]{border-color:#A3122F;background:#FFF1F3}
 .posy-rail{align-self:stretch}
 .posy .blooms{transform-box:view-box;transition:transform .4s cubic-bezier(.23,1,.32,1)}
 @media (prefers-reduced-motion:reduce){.posy .blooms{transition:none}}
+
+/* order: inspiration photo */
+input[type=file]{padding:9px 10px;cursor:pointer;font-size:15px;color:var(--muted)}
+input[type=file]::file-selector-button{font:600 15px var(--sans);color:var(--ink);background:var(--white);border:1px solid var(--line);border-radius:999px;padding:8px 16px;margin-right:12px;cursor:pointer}
+input[type=file]:hover::file-selector-button{background:var(--blush)}
+.thumbs{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.thumbs img{width:72px;height:72px;object-fit:cover;border-radius:12px;border:1px solid var(--line)}
+.photo-note{display:flex;gap:10px;align-items:flex-start;background:var(--white);border-radius:12px;padding:12px 14px;margin:0 0 12px;font-size:15px}
+.photo-note .star{margin-top:4px}
+
+/* home: holiday banner */
+.promo{background:var(--ink);color:var(--white)}
+.promo .wrap{display:flex;align-items:center;justify-content:center;gap:12px 16px;flex-wrap:wrap;padding-block:12px;text-align:center}
+.promo p{margin:0;font-size:15px}
+.promo .star{background:var(--petal)}
+.promo .btn{min-height:40px;padding:0 18px;font-size:14px;box-shadow:none}
+@media (max-width:600px){.promo .wrap{flex-wrap:nowrap;justify-content:space-between;text-align:left;padding-block:10px}.promo .star{display:none}.promo p{font-size:14px;line-height:1.4}.promo .btn{flex:none;min-height:44px}}
+
+/* 404 */
+.nf{min-height:62vh;display:flex;align-items:center}
+.polish .nf,.polish .nf h1{text-align:center}
+.nf-star{width:44px;height:44px;margin-bottom:18px;animation:spin 14s linear infinite}
+.nf-ctas{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px}
+.page-head .nf-text{margin:22px auto 0}
+.nf-text a{color:var(--rose);font-weight:600}
