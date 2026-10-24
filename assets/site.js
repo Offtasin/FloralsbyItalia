@@ -79,19 +79,18 @@
   gsap.registerPlugin(ScrollTrigger);
   var mobile=matchMedia('(max-width:860px)').matches;
 
-  // Home hero: the wrap paper unfolds, the bouquet fills the head, the ribbon ties across.
+  // Home hero: the wreath blooms in, the bouquet opens inside it, the ribbon tags tie on.
   if($('.hero')){
     var tl=gsap.timeline({defaults:{ease:'power4.out'}});
-    tl.from('.bq .layer',{scale:.4,rotation:-50,svgOrigin:'200 205',opacity:0,duration:1.3,stagger:.12},0)
-      .from('.bq .cone,.bq .fold',{scaleY:0,svgOrigin:'200 290',duration:1,ease:'power3.out'},.15)
-      .from('.bq .head',{scale:.3,opacity:0,duration:1.2,ease:'back.out(1.4)'},.4)
-      .from('.bq .flap',{scale:0,svgOrigin:'200 300',opacity:0,duration:.8,stagger:.1,ease:'back.out(1.6)'},.85)
-      .from('.bq .bow',{scale:0,rotation:-30,svgOrigin:'200 333',duration:.8,ease:'back.out(2)'},1.1)
-      .from('.hero .hl__in',{yPercent:110,duration:1.15,stagger:.1},.3)
-      .from('[data-intro]',{y:18,autoAlpha:0,duration:.9,stagger:.08},.6)
-      .from('.bq .sticker',{scale:0,rotation:-90,duration:.8,ease:'back.out(1.7)'},1.3);
-    gsap.to('.bq',{rotation:2,y:-6,duration:4,yoyo:true,repeat:-1,ease:'sine.inOut',delay:2.4});
-    gsap.to('.bq',{yPercent:-6,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+    tl.from('.wreath .ring',{scale:.6,rotation:-35,autoAlpha:0,duration:1.5},0)
+      .from('.wreath .glow',{scale:.4,autoAlpha:0,duration:1.6},0)
+      .from('.wreath .vid',{clipPath:'circle(0% at 50% 50%)',duration:1.3,ease:'power3.inOut'},.35)
+      .from('.wreath video',{scale:1.8,duration:1.8},.35)
+      .from('.hero .hl__in',{yPercent:110,duration:1.15},.55)
+      .from('[data-intro]',{y:18,autoAlpha:0,duration:.9,stagger:.08},.8)
+      .from('.wreath .tag',{clipPath:'inset(0 100% 0 0)',duration:.9,stagger:.2,ease:'power3.inOut'},1.1);
+    gsap.to('.wreath .ring',{rotation:4,duration:6,yoyo:true,repeat:-1,ease:'sine.inOut',delay:1.6});
+    gsap.to('.wreath',{yPercent:-8,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
   }
 
   // Inner page headers rise in.
