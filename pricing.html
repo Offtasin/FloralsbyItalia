@@ -16,7 +16,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
 </head>
-<body>
+<body class="polish">
 <a class="skip" href="#main">Skip to content</a>
 <header class="nav" id="nav">
   <div class="wrap">
@@ -30,11 +30,13 @@
   </div>
 </header>
 <main id="main">
-<section class="page-head" aria-labelledby="pg-h">
+<section class="page-head ph2" aria-labelledby="pg-h">
   <div class="wrap">
-    <div class="kicker"><span class="star" aria-hidden="true"></span>Starting at $50</div>
-    <h1 id="pg-h">Pricing &amp; <em>how it works</em></h1>
-    <p>Every bouquet is quoted after we talk, since flower type, count and wrap all change the cost. These are where most orders start.</p>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="./">Home</a><span aria-hidden="true">/</span><span aria-current="page">Pricing</span></nav>
+    <div class="ph2-grid">
+      <h1 id="pg-h">Pricing &amp; <em>how it works</em></h1>
+      <div class="ph2-side"><p>Every bouquet is quoted after we talk, since flower type, count and wrap all change the cost. These are where most orders start.</p><dl class="facts"><div><dt>Bouquets from</dt><dd>$50</dd></div><div><dt>Deposit</dt><dd>20%</dd></div><div><dt>Quotes in</dt><dd>1 day</dd></div></dl></div>
+    </div>
   </div>
 </section>
 
@@ -47,7 +49,14 @@
       <a class="size" href="sizes.html#large" data-rise><div class="dot"><i style="width:52px;height:52px"></i></div><h3>Large</h3><p class="stems">About 50 stems</p><p class="from">from<strong>$140</strong></p><p class="for">Anniversaries and big birthdays.</p><span class="see">See examples</span></a>
       <a class="size" href="sizes.html#grand" data-rise><div class="dot"><i style="width:64px;height:64px"></i></div><h3>Grand</h3><p class="stems">100 stems and up</p><p class="from">from<strong>$250</strong></p><p class="for">The full ramo buchón moment.</p><span class="see">See examples</span></a>
     </div>
-    <div class="holiday"><span class="star" aria-hidden="true"></span><p><strong>Holiday pricing:</strong> Valentine's Day, Mother's Day and other big holidays cost more because flower prices jump that week. Book at least a week ahead for those dates.</p></div>
+    <div class="dates">
+      <div class="dates-head"><h3>Book ahead for big dates</h3><p>Holiday bouquets cost more because flower prices jump that week, and spots fill fast.</p></div>
+      <ul class="date-list">
+        <li data-rise><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg><div><b>Valentine's Day</b><span data-date="vday">Sun, Feb 14</span></div><em>Book by <span data-by="vday">Feb 7</span></em></li>
+        <li data-rise><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></svg><div><b>Mother's Day</b><span data-date="mday">Sun, May 9</span></div><em>Book by <span data-by="mday">May 2</span></em></li>
+        <li data-rise><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 9 10-5 10 5-10 5Z"/><path d="M6 11v5c3 2.5 9 2.5 12 0v-5"/></svg><div><b>Graduation season</b><span>May and June</span></div><em>Book 1 week ahead</em></li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -56,18 +65,18 @@
     <div data-rise>
       <h3>Add-ons</h3>
       <dl>
-        <dt>Ribbon with gold lettering</dt><dd>$8</dd>
-        <dt>Butterflies, pearls or rhinestones</dt><dd>from $10</dd>
-        <dt>Mini crown</dt><dd>from $15</dd>
-        <dt>Heart or number balloon</dt><dd>from $10</dd>
+        <dt><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 13 7 21l-1-4-4-1 6-7"/><path d="m12 13 5 8 1-4 4-1-6-7"/><circle cx="12" cy="7" r="5"/></svg>Ribbon with gold lettering</dt><dd>$8</dd>
+        <dt><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></svg>Butterflies, pearls or rhinestones</dt><dd>from $10</dd>
+        <dt><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 8 4.5 4L12 5l4.5 7L21 8l-2 11H5L3 8Z"/></svg>Mini crown</dt><dd>from $15</dd>
+        <dt><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16c3.3 0 6-3.1 6-7s-2.7-6-6-6-6 2.7-6 6 2.7 7 6 7Z"/><path d="M12 16v2c0 1.5-2 2-2 3.5"/></svg>Heart or number balloon</dt><dd>from $10</dd>
       </dl>
     </div>
     <div data-rise>
       <h3>Getting it there</h3>
       <dl>
-        <dt>Pickup in East LA</dt><dd>Free</dd>
-        <dt>Delivery nearby</dt><dd>from $15</dd>
-        <dt>Delivery across LA</dt><dd>$25–$40</dd>
+        <dt><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9 4.5 4h15L21 9"/><path d="M4 9v11h16V9"/><path d="M9 20v-6h6v6"/></svg>Pickup in East LA</dt><dd>Free</dd>
+        <dt><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg>Delivery nearby</dt><dd>from $15</dd>
+        <dt><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h11v10H3z"/><path d="M14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg>Delivery across LA</dt><dd>$25–$40</dd>
       </dl>
     </div>
   </div>
@@ -85,15 +94,17 @@
   </div>
 </section>
 
-<section class="sec band-white faq" aria-labelledby="faq-h">
-  <div class="wrap">
-    <div class="sec-head"><h2 id="faq-h" data-reveal>Questions</h2><p>Don't see yours? Text us at 323-842-0960.</p></div>
+<section class="sec band-white faq faq2" aria-labelledby="faq-h">
+  <div class="wrap faq2-grid">
+    <div class="faq2-head"><h2 id="faq-h" data-reveal>Questions</h2><p>Don't see yours? Text us and we'll answer.</p><p class="faq2-num">323-842-0960</p><a class="btn btn-pink" href="sms:+13238420960">Text us</a></div>
+    <div class="faq2-list">
     <details><summary>How far ahead should I order?</summary><p>Three days ahead works for most bouquets. For 100 stems and up, and for Valentine's Day or Mother's Day, order at least a week ahead.</p></details>
     <details><summary>How does the deposit work?</summary><p>Once you approve your quote, a 20% deposit holds your date and lets us buy your flowers. The rest is due at pickup or delivery.</p></details>
     <details><summary>Why do prices go up on holidays?</summary><p>Flower prices jump the week of Valentine's Day, Mother's Day and other big holidays, so holiday bouquets cost more than the starting prices above.</p></details>
     <details><summary>Can you match a photo I found?</summary><p>Yes. Send the photo with your request and we'll tell you what it takes to make it, or suggest swaps that fit your budget.</p></details>
     <details><summary>Where do you deliver?</summary><p>We're based in East Los Angeles and deliver around LA. The delivery fee depends on distance and is included in your quote.</p></details>
     <details><summary>How do I keep it fresh?</summary><p>Trim the stems at an angle, put them in cool water and change the water every couple of days. Keep the bouquet out of direct sun.</p></details>
+    </div>
   </div>
 </section>
 <section class="sec cta-band" aria-label="Start an order">

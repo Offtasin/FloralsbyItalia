@@ -17,6 +17,20 @@
   addEventListener('scroll',onScroll,{passive:true});onScroll();
   $$('[data-year]').forEach(function(e){e.textContent=new Date().getFullYear()});
 
+  /* ---------- sizes sub-nav: highlight the size in view ---------- */
+  var spy=$$('[data-spy]');
+  if(spy.length&&'IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){spy.forEach(function(a){a.setAttribute('aria-current',String(a.dataset.spy===e.target.id))})}})},{rootMargin:'-45% 0px -50% 0px'});
+    spy.forEach(function(a){var t=document.getElementById(a.dataset.spy);if(t)io.observe(t)});
+  }
+
+  /* ---------- pricing: keep holiday dates current ---------- */
+  var nextDate=function(fn){var t=new Date();t.setHours(0,0,0,0);var d=fn(t.getFullYear());return d>=t?d:fn(t.getFullYear()+1)};
+  var mday=function(y){var d=new Date(y,4,1);d.setDate(1+((7-d.getDay())%7)+7);return d};
+  var dates={vday:nextDate(function(y){return new Date(y,1,14)}),mday:nextDate(mday)};
+  $$('[data-date]').forEach(function(el){var d=dates[el.dataset.date];if(d)el.textContent=d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})});
+  $$('[data-by]').forEach(function(el){var d=dates[el.dataset.by];if(d){var b=new Date(d);b.setDate(b.getDate()-7);el.textContent=b.toLocaleDateString('en-US',{month:'short',day:'numeric'})}});
+
   /* ---------- "Ask for this look" carries the bouquet name to the order page ---------- */
   document.addEventListener('click',function(e){
     var a=e.target.closest('[data-look]');if(!a) return;

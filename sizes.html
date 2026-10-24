@@ -16,7 +16,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
 </head>
-<body>
+<body class="polish">
 <a class="skip" href="#main">Skip to content</a>
 <header class="nav" id="nav">
   <div class="wrap">
@@ -30,12 +30,21 @@
   </div>
 </header>
 <main id="main">
-<section class="page-head" aria-labelledby="pg-h">
+<section class="page-head ph2" aria-labelledby="pg-h">
   <div class="wrap">
-    <div class="kicker"><span class="star" aria-hidden="true"></span>Starting at $50</div>
-    <h1 id="pg-h">Bouquet <em>sizes</em></h1>
-    <p>See what each size looks like before you order. Holiday prices run higher, and every bouquet is quoted to your flowers and wrap.</p>
-    <nav class="size-jump" aria-label="Sizes"><a href="#small">Small</a><a href="#medium">Medium</a><a href="#large">Large</a><a href="#grand">Grand</a></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="./">Home</a><span aria-hidden="true">/</span><span aria-current="page">Sizes</span></nav>
+    <div class="ph2-grid">
+      <h1 id="pg-h">Bouquet <em>sizes</em></h1>
+      <div class="ph2-side"><p>See what each size looks like before you order. Holiday prices run higher, and every bouquet is quoted to your flowers and wrap.</p><dl class="facts"><div><dt>Bouquets from</dt><dd>$50</dd></div><div><dt>Most popular</dt><dd>Medium</dd></div><div><dt>Largest</dt><dd>100+</dd></div></dl></div>
+    </div>
+  </div>
+</section>
+
+<nav class="subnav" aria-label="Sizes"><div class="wrap"><a href="#small" data-spy="small">Small<span>$50</span></a><a href="#medium" data-spy="medium">Medium<span>$85</span></a><a href="#large" data-spy="large">Large<span>$140</span></a><a href="#grand" data-spy="grand">Grand<span>$250</span></a></div></nav>
+<section class="sec band-white glance" aria-labelledby="glance-h">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="glance-h" data-reveal>At a <em>glance</em></h2><p>Starting prices for standard flowers and wrap. Premium blooms, add-ons and holiday dates add to the quote.</p></div>
+    <div class="table-wrap"><table class="glance-t"><thead><tr><th scope="col">Size</th><th scope="col">Stems</th><th scope="col">Starting at</th><th scope="col">Best for</th><th scope="col"><span class="sr">Examples</span></th></tr></thead><tbody><tr><th scope="row"><a href="#small">Small</a></th><td>10–12 stems</td><td class="num">$50</td><td>A thank-you, a first date, just because</td><td><a class="textlink" href="#small">See examples</a></td></tr><tr><th scope="row"><a href="#medium">Medium</a></th><td>About 25 stems</td><td class="num">$85</td><td>Birthdays, anniversaries, graduations</td><td><a class="textlink" href="#medium">See examples</a></td></tr><tr><th scope="row"><a href="#large">Large</a></th><td>About 50 stems</td><td class="num">$140</td><td>Milestone birthdays and big celebrations</td><td><a class="textlink" href="#large">See examples</a></td></tr><tr><th scope="row"><a href="#grand">Grand</a></th><td>100 stems and up</td><td class="num">$250</td><td>Proposals, quinceañeras, unforgettable moments</td><td><a class="textlink" href="#grand">See examples</a></td></tr></tbody></table></div>
   </div>
 </section>
 <section class="sec band-blush size-sec" id="small" aria-labelledby="small-h">
