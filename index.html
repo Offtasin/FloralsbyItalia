@@ -43,16 +43,23 @@
     </div>
     <div class="bq">
       <svg class="back" viewBox="0 0 400 560" aria-hidden="true">
-        <polygon class="paper burst-paper" points="200.0,9.0 232.8,40.2 275.0,23.9 293.3,65.3 338.6,66.4 339.7,111.7 381.1,130.0 364.8,172.2 396.0,205.0 364.8,237.8 381.1,280.0 339.7,298.3 338.6,343.6 293.3,344.7 275.0,386.1 232.8,369.8 200.0,401.0 167.2,369.8 125.0,386.1 106.7,344.7 61.4,343.6 60.3,298.3 18.9,280.0 35.2,237.8 4.0,205.0 35.2,172.2 18.9,130.0 60.3,111.7 61.4,66.4 106.7,65.3 125.0,23.9 167.2,40.2"/>
-        <path class="paper cone" d="M84,300 L316,300 L216,542 Q200,558 184,542 Z"/>
-        <path class="fold" d="M200,312 L200,536 M150,312 L192,532 M250,312 L208,532"/>
+        <defs>
+          <linearGradient id="coneG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFD9E5"/><stop offset=".55" stop-color="#F7A9C3"/><stop offset="1" stop-color="#EE7FA6"/></linearGradient>
+          <linearGradient id="wingG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF4F7"/><stop offset="1" stop-color="#FFC9DA"/></linearGradient>
+        </defs>
+        <path class="cone" fill="url(#coneG)" d="M92,290 L308,290 L216,538 Q200,556 184,538 Z"/>
+        <path class="fold" d="M200,300 L200,540 M146,300 L192,536 M254,300 L208,536"/>
+        <g class="layer"><polygon fill="#FFC9DA" transform="rotate(11 200 205)" points="200.0,9.0 232.8,40.2 275.0,23.9 293.3,65.3 338.6,66.4 339.7,111.7 381.1,130.0 364.8,172.2 396.0,205.0 364.8,237.8 381.1,280.0 339.7,298.3 338.6,343.6 293.3,344.7 275.0,386.1 232.8,369.8 200.0,401.0 167.2,369.8 125.0,386.1 106.7,344.7 61.4,343.6 60.3,298.3 18.9,280.0 35.2,237.8 4.0,205.0 35.2,172.2 18.9,130.0 60.3,111.7 61.4,66.4 106.7,65.3 125.0,23.9 167.2,40.2"/></g>
+        <g class="layer"><polygon fill="#FFE6EE" transform="rotate(-7 200 205) translate(10 10) scale(.95)" points="200.0,9.0 232.8,40.2 275.0,23.9 293.3,65.3 338.6,66.4 339.7,111.7 381.1,130.0 364.8,172.2 396.0,205.0 364.8,237.8 381.1,280.0 339.7,298.3 338.6,343.6 293.3,344.7 275.0,386.1 232.8,369.8 200.0,401.0 167.2,369.8 125.0,386.1 106.7,344.7 61.4,343.6 60.3,298.3 18.9,280.0 35.2,237.8 4.0,205.0 35.2,172.2 18.9,130.0 60.3,111.7 61.4,66.4 106.7,65.3 125.0,23.9 167.2,40.2"/></g>
+        <g class="layer"><polygon fill="#FFFFFF" transform="translate(20 20) scale(.9)" points="200.0,9.0 232.8,40.2 275.0,23.9 293.3,65.3 338.6,66.4 339.7,111.7 381.1,130.0 364.8,172.2 396.0,205.0 364.8,237.8 381.1,280.0 339.7,298.3 338.6,343.6 293.3,344.7 275.0,386.1 232.8,369.8 200.0,401.0 167.2,369.8 125.0,386.1 106.7,344.7 61.4,343.6 60.3,298.3 18.9,280.0 35.2,237.8 4.0,205.0 35.2,172.2 18.9,130.0 60.3,111.7 61.4,66.4 106.7,65.3 125.0,23.9 167.2,40.2"/></g>
       </svg>
       <div class="head"><video autoplay muted loop playsinline preload="auto" poster="assets/img/hero-gerbera-poster.jpg" aria-label="Pink gerbera and rose bouquet in cream bow print wrap"><source src="assets/video/hero-gerbera.mp4" type="video/mp4"></video></div>
       <svg class="front" viewBox="0 0 400 560" aria-hidden="true">
-        <path class="flap" d="M48,286 L150,318 L104,410 Z"/>
-        <path class="flap" d="M352,286 L250,318 L296,410 Z"/>
+        <path class="flap" fill="url(#wingG)" d="M70,262 Q120,300 170,318 L132,402 Q96,340 70,262 Z"/>
+        <path class="flap" fill="url(#wingG)" d="M330,262 Q280,300 230,318 L268,402 Q304,340 330,262 Z"/>
+        <path fill="#FFFFFF" d="M150,318 Q200,336 250,318 L246,342 Q200,358 154,342 Z"/>
+        <g class="bow"><path fill="#FFFFFF" stroke="#F3B7CA" stroke-width="1.5" d="M200,332 C176,312 150,318 156,336 C160,350 184,346 200,332 Z M200,332 C224,312 250,318 244,336 C240,350 216,346 200,332 Z"/><path fill="#FFFFFF" stroke="#F3B7CA" stroke-width="1.5" d="M194,334 L178,386 L190,380 L198,392 Z M206,334 L222,386 L210,380 L202,392 Z"/><circle cx="200" cy="333" r="7" fill="#FFFFFF" stroke="#F3B7CA" stroke-width="1.5"/></g>
       </svg>
-      <div class="ribbon" aria-hidden="true"><span class="script-gold">hecho con amor</span></div>
       <div class="sticker"><span><b>$50</b>bouquets from</span></div>
     </div>
   </div>
