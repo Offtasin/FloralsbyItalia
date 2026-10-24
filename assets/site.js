@@ -126,8 +126,8 @@
       ask.dataset.look=s.dataset.name;ask.href='order.html?look='+encodeURIComponent(s.dataset.name);
       gsap.fromTo('.now',{y:12,autoAlpha:0},{y:0,autoAlpha:1,duration:.5,ease:'power3.out',overwrite:true});
     };
-    var stl=gsap.timeline({scrollTrigger:{trigger:'.stack-sec',start:'top top',end:'+='+(n*75)+'%',pin:true,scrub:.7,
-      onUpdate:function(self){barEl.style.transform='scaleX('+(0.25+self.progress*0.75).toFixed(3)+')';setActive(Math.min(n-1,Math.round(self.progress*(n-1))))}}});
+    var stl=gsap.timeline({scrollTrigger:{trigger:'.stack-sec',start:'top top',end:'+='+(n*40)+'%',pin:true,scrub:.7,
+      onUpdate:function(self){barEl.style.transform='scaleX('+(0.25+self.progress*0.75).toFixed(3)+')';setActive(Math.min(n-1,Math.round(self.progress*(n-1+0.4))))}}});
     scards.forEach(function(s,i){
       if(i===0) return;
       var fromRight=i%2===1;

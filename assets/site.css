@@ -198,7 +198,7 @@ h2 em{font-style:italic;color:var(--pink)}
   .pinned .stack-pin{grid-template-columns:1fr;align-content:center;gap:18px;padding-top:80px;padding-bottom:24px}
   .pinned .stack-head h2{font-size:44px;margin:0}
   .pinned .stack-head p{display:none}
-  .pinned .stack-cards{height:min(46svh,430px);order:2}
+  .pinned .stack-cards{height:min(42svh,400px);order:2;margin-top:10px}
   .pinned .stack-info{margin-top:6px;order:3}
   .pinned .stack-head{order:1}
   .now h3{font-size:30px}
