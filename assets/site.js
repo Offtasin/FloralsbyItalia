@@ -35,6 +35,14 @@
     var customToggle=$('#customToggle'),customWrap=$('#customWrap');
     customToggle.addEventListener('change',function(){customWrap.classList.toggle('show',customToggle.checked);if(customToggle.checked)$('#custom').focus()});
     var err=$('#err'),done=$('#done'),sum=$('#summary');
+    var setFieldError=function(name,msg){
+      var input=form.elements[name],id=name+'-err',p=document.getElementById(id);
+      if(!p){p=document.createElement('p');p.id=id;p.className='field-error';input.insertAdjacentElement('afterend',p);input.setAttribute('aria-describedby',id)}
+      p.textContent=msg;p.hidden=!msg;
+      if(msg)input.setAttribute('aria-invalid','true');else input.removeAttribute('aria-invalid');
+    };
+    ['name','phone','date'].forEach(function(n){form.elements[n].addEventListener('input',function(){if(this.getAttribute('aria-invalid'))setFieldError(n,'')})});
+
     var val=function(n){var e=form.elements[n];return e&&e.value?e.value.trim():''};
     var copy=function(text){
       function fallback(){var a=document.createElement('textarea');a.value=text;a.setAttribute('readonly','');a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove()}
@@ -43,11 +51,12 @@
     };
     form.addEventListener('submit',function(e){
       e.preventDefault();
-      var missing=[];
-      if(!val('name'))missing.push('your name');
-      if(val('phone').replace(/\D/g,'').length<10)missing.push('a 10-digit phone number');
-      if(!val('date'))missing.push('the date you need it');
-      if(missing.length){err.textContent='Add '+missing.join(', ')+' so we can quote your bouquet.';err.hidden=false;return}
+      var checks=[['name',!val('name'),'Enter your name.'],
+                  ['phone',val('phone').replace(/\D/g,'').length<10,'Enter a 10-digit phone number, like 323-555-0100.'],
+                  ['date',!val('date'),'Pick the date you need your bouquet.']];
+      var bad=[];
+      checks.forEach(function(c){setFieldError(c[0],c[1]?c[2]:'');if(c[1])bad.push(c[0])});
+      if(bad.length){err.textContent='Fix '+(bad.length===1?'1 field':bad.length+' fields')+' above to continue.';err.hidden=false;form.elements[bad[0]].focus();return}
       err.hidden=true;
       var flowers=$$('[name=flowers]:checked',form).map(function(i){return i.value}).join(', ');
       var size=($('[name=size]:checked',form)||{}).value||'Not sure yet';

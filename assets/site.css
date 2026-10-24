@@ -4,7 +4,7 @@
   --snow:#FFF7FA;
   --blush:#FFE6EE;
   --petal:#FFC9DA;
-  --pink:#E8457F;
+  --pink:#D3306C;
   --rose:#C21857;
   --ink:#3D0D27;
   --muted:#85506A;
@@ -34,7 +34,7 @@ a{color:inherit}
 /* buttons */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 28px;border-radius:999px;font:600 16px/1 var(--sans);text-decoration:none;border:1.5px solid var(--ink);cursor:pointer;transition:transform .3s var(--ease),background .2s,color .2s,box-shadow .3s}
 .btn:hover{transform:translateY(-2px)}
-.btn-pink{background:var(--pink);border-color:var(--pink);color:var(--white);box-shadow:0 12px 26px -12px rgba(232,69,127,.9)}
+.btn-pink{background:var(--pink);border-color:var(--pink);color:var(--white);box-shadow:0 12px 26px -12px rgba(211,48,108,.9)}
 .btn-pink:hover{background:var(--rose);border-color:var(--rose)}
 .btn-ghost{background:var(--white);color:var(--ink);border-color:var(--line)}
 .btn-ghost:hover{background:var(--ink);color:var(--white);border-color:var(--ink)}
@@ -50,15 +50,15 @@ a{color:inherit}
 .brand span{font-family:var(--display);font-size:27px;letter-spacing:-.01em;line-height:1}
 .brand em{color:var(--pink)}
 .nav ul{display:flex;gap:30px;list-style:none;margin:0;padding:0;font-size:15px;font-weight:500}
-.nav ul a{text-decoration:none;color:var(--muted);position:relative}
-.nav ul a::after{content:"";position:absolute;left:0;right:100%;bottom:-5px;height:1.5px;background:var(--pink);transition:right .3s var(--ease)}
+.nav ul a{text-decoration:none;color:var(--muted);position:relative;display:inline-block;padding-block:12px}
+.nav ul a::after{content:"";position:absolute;left:0;right:100%;bottom:7px;height:1.5px;background:var(--pink);transition:right .3s var(--ease)}
 .nav ul a:hover,.nav ul a[aria-current="page"]{color:var(--ink)}
 .nav ul a:hover::after,.nav ul a[aria-current="page"]::after{right:0}
 .nav-r{display:flex;gap:14px;align-items:center}
 .nav .btn{min-height:42px;padding:0 18px;font-size:15px;white-space:nowrap}
 @media (max-width:480px){.brand img{width:44px;height:44px}.brand span{font-size:22px}.nav-r .btn{display:none}}
-.ig-chip{font-size:15px;font-weight:600;text-decoration:none;color:var(--rose)}
-.menu-btn{display:none;background:none;border:0;padding:8px;cursor:pointer;color:var(--ink)}
+.ig-chip{font-size:15px;font-weight:600;text-decoration:none;color:var(--rose);display:inline-block;padding:12px 4px}
+.menu-btn{display:none;background:none;border:0;padding:9px;width:44px;height:44px;cursor:pointer;color:var(--ink)}
 .menu-btn svg{width:26px;height:26px}
 @media (max-width:860px){
   .nav ul{position:absolute;top:70px;left:0;right:0;flex-direction:column;gap:0;background:var(--white);border-bottom:1px solid var(--line);padding:8px max(var(--gut),env(safe-area-inset-left,0px)) 16px;display:none;box-shadow:0 24px 40px -30px rgba(61,13,39,.5)}
@@ -159,7 +159,7 @@ h2 em{font-style:italic;color:var(--pink)}
 .cta-band .wrap{position:relative;z-index:1}
 .cta-band h2{color:var(--white);margin:0 auto 20px;max-width:14ch}
 .cta-band h2 em{color:var(--white)}
-.cta-band p{margin:0 auto 34px;max-width:40ch;color:#FFE6EE}
+.cta-band p{margin:0 auto 34px;max-width:40ch;color:var(--white)}
 .cta-band .ctas{justify-content:center}
 .cta-band .btn-white{background:var(--white);color:var(--rose);border-color:var(--white)}
 .cta-band .btn-line{background:transparent;color:var(--white);border-color:rgba(255,255,255,.7)}
@@ -204,7 +204,7 @@ h2 em{font-style:italic;color:var(--pink)}
   .now h3{font-size:30px}
   .now p{font-size:15px;margin-bottom:10px}
 }
-.ask{background:var(--white);border:1px solid var(--line);border-radius:999px;padding:10px 18px;font:600 14px var(--sans);color:var(--rose);cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-block;transition:background .2s,color .2s,border-color .2s}
+.ask{background:var(--white);border:1px solid var(--line);border-radius:999px;padding:10px 18px;min-height:44px;display:inline-flex!important;align-items:center;font:600 14px var(--sans);color:var(--rose);cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-block;transition:background .2s,color .2s,border-color .2s}
 .ask:hover{background:var(--pink);color:var(--white);border-color:var(--pink)}
 
 /* gallery */
@@ -277,7 +277,7 @@ fieldset{border:0;padding:0;margin:0;min-width:0}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
 .chips label{font-weight:500;font-size:15px;cursor:pointer}
 .chips input{position:absolute;opacity:0;width:1px;height:1px;min-height:0}
-.chips span{display:inline-block;padding:9px 16px;border:1px solid var(--line);border-radius:999px;background:var(--snow);transition:background .15s,color .15s,translate .2s}
+.chips span{display:inline-flex;align-items:center;min-height:44px;padding:9px 16px;border:1px solid var(--line);border-radius:999px;background:var(--snow);transition:background .15s,color .15s,translate .2s}
 .chips label:hover span{translate:0 -1px}
 .chips input:checked+span{background:var(--pink);color:var(--white);border-color:var(--pink)}
 .chips input:focus-visible+span{outline:2px solid var(--pink);outline-offset:2px}
@@ -293,9 +293,9 @@ fieldset{border:0;padding:0;margin:0;min-width:0}
 .contact-card{background:var(--pink);color:var(--white);border-radius:30px;padding:clamp(26px,3.4vw,40px);position:sticky;top:96px;overflow:hidden}
 .contact-card::after{content:"";position:absolute;right:-70px;bottom:-70px;width:220px;height:220px;background:rgba(255,255,255,.14);clip-path:var(--burst);animation:spin 40s linear infinite}
 .contact-card h2{color:var(--white);font-size:clamp(40px,4vw,56px);margin-bottom:6px}
-.contact-card .label{margin:18px 0 2px;font-size:14px;color:#FFE6EE}
+.contact-card .label{margin:18px 0 2px;font-size:14px;color:var(--white)}
 .contact-card .num{display:block;font-family:var(--display);font-size:clamp(40px,4.4vw,58px);line-height:1;letter-spacing:-.01em;user-select:all}
-.contact-card p{margin:0;color:#FFE6EE}
+.contact-card p{margin:0;color:var(--white)}
 .contact-links{display:flex;flex-direction:column;gap:12px;margin-top:26px;position:relative;z-index:1}
 .contact-links .btn{background:var(--white);color:var(--rose);border-color:var(--white);justify-content:flex-start}
 .contact-links .btn.alt{background:transparent;color:var(--white);border-color:rgba(255,255,255,.7)}
@@ -315,7 +315,8 @@ footer .big em{color:var(--petal)}
 footer .row{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;border-top:1px solid rgba(255,255,255,.18);padding-top:28px;font-size:15px}
 footer h4{margin:0 0 8px;font-size:13px;font-weight:600;color:var(--petal)}
 footer a{color:var(--white)}
-footer ul{list-style:none;padding:0;margin:0;display:grid;gap:6px}
+footer ul{list-style:none;padding:0;margin:0;display:grid;gap:0}
+footer .row a{display:inline-flex;align-items:center;min-height:44px}
 footer .num{font-family:var(--display);font-size:28px;color:var(--white);line-height:1}
 @media (max-width:760px){footer .row{grid-template-columns:1fr 1fr}footer .row>div:first-child{grid-column:1/-1}}
 
@@ -342,7 +343,7 @@ a.size:hover .see{gap:10px}
 
 /* sizes page */
 .size-jump{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:30px}
-.size-jump a{background:var(--white);border:1px solid var(--line);border-radius:999px;padding:9px 20px;font-weight:600;font-size:15px;text-decoration:none;color:var(--ink);transition:background .2s,color .2s}
+.size-jump a{background:var(--white);border:1px solid var(--line);border-radius:999px;padding:12px 22px;font-weight:600;font-size:15px;text-decoration:none;color:var(--ink);transition:background .2s,color .2s}
 .size-jump a:hover{background:var(--pink);color:var(--white);border-color:var(--pink)}
 .size-sec{scroll-margin-top:70px}
 .size-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(32px,6vw,88px);align-items:center}
@@ -363,3 +364,7 @@ a.size:hover .see{gap:10px}
 .sp-empty p{margin:0;color:var(--muted);max-width:30ch}
 @media (max-width:860px){.size-grid{grid-template-columns:1fr}}
 @media (min-width:861px){.size-grid{align-items:start}.size-info{position:sticky;top:120px}}
+
+/* inline form errors */
+.field-error{color:#A3122F;font-size:14px;font-weight:500;margin:2px 0 0}
+input[aria-invalid="true"]{border-color:#A3122F;background:#FFF1F3}
