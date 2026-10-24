@@ -7,7 +7,18 @@
 <meta name="description" content="Request a custom bouquet from Florals by Italia. Quotes usually within a day.">
 <meta property="og:title" content="Order | Florals by Italia">
 <meta property="og:description" content="Request a custom bouquet from Florals by Italia. Quotes usually within a day.">
-<meta property="og:image" content="https://floralsbyitalia.vercel.app/assets/img/logo-ivory-512.jpg">
+<meta property="og:image" content="https://floralsbyitalia.vercel.app/assets/img/share/order.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Florals by Italia logo next to a pink birthday bouquet of lilies and roses">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://floralsbyitalia.vercel.app/order.html">
+<meta property="og:site_name" content="Florals by Italia">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://floralsbyitalia.vercel.app/order.html">
+<link rel="alternate" hreflang="en" href="https://floralsbyitalia.vercel.app/order.html">
+<link rel="alternate" hreflang="es" href="https://floralsbyitalia.vercel.app/es/order.html">
+<link rel="alternate" hreflang="x-default" href="https://floralsbyitalia.vercel.app/order.html">
 <meta name="theme-color" content="#FFF7FA">
 <link rel="icon" type="image/png" href="assets/img/logo-64.png">
 <link rel="apple-touch-icon" href="assets/img/logo-192.png">
@@ -23,6 +34,7 @@
     <a class="brand" href="./"><img src="assets/img/logo-192.png" alt="" width="96" height="96"><span>Florals <em>by</em> Italia</span></a>
     <ul id="menu"><li><a href="./">Home</a></li><li><a href="bouquets.html">Bouquets</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="order.html" aria-current="page">Order</a></li></ul>
     <div class="nav-r">
+      <a class="lang" href="es/order.html" hreflang="es" lang="es" aria-label="Ver en español">ES</a>
       <a class="ig-chip" href="https://www.instagram.com/floralsbyitalia/" target="_blank" rel="noopener">Instagram</a>
       <a class="btn btn-pink" href="order.html">Order now</a>
       <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg></button>
@@ -49,13 +61,14 @@
         <select id="occasion" name="occasion"><option>Birthday</option><option>Anniversary</option><option>Valentine's Day</option><option>Mother's Day</option><option>Graduation</option><option>Quinceañera</option><option>Just because</option><option>Something else</option></select></div>
       <div class="f"><label for="budget">Budget</label>
         <select id="budget" name="budget"><option>$50–$100</option><option selected>$100–$150</option><option>$150–$250</option><option>$250+</option></select></div>
-      <fieldset class="f full"><legend>Size</legend><div class="chips"><label><input type="radio" name="size" value="Small (10–12 stems, from $50)"><span>Small</span></label><label><input type="radio" name="size" value="Medium (~25 stems, from $85)" checked><span>Medium</span></label><label><input type="radio" name="size" value="Large (~50 stems, from $140)"><span>Large</span></label><label><input type="radio" name="size" value="Grand (100+ stems, from $250)"><span>Grand</span></label><label><input type="radio" name="size" value="Just flowers (loose stems, no wrap)"><span>Just flowers</span></label><label><input type="radio" name="size" value="Not sure yet"><span>Not sure</span></label></div></fieldset>
+      <fieldset class="f full"><legend>Size</legend><div class="chips"><label><input type="radio" name="size" data-key="Small" value="Small (10–12 stems, from $50)"><span>Small</span></label><label><input type="radio" name="size" data-key="Medium" value="Medium (~25 stems, from $85)" checked><span>Medium</span></label><label><input type="radio" name="size" data-key="Large" value="Large (~50 stems, from $140)"><span>Large</span></label><label><input type="radio" name="size" data-key="Grand" value="Grand (100+ stems, from $250)"><span>Grand</span></label><label><input type="radio" name="size" value="Just flowers (loose stems, no wrap)"><span>Just flowers</span></label><label><input type="radio" name="size" value="Not sure yet"><span>Not sure</span></label></div></fieldset>
       <fieldset class="f full" id="justFlowers"><legend>Just flowers <span class="hint">loose stems, no wrap, to arrange yourself</span></legend><div class="chips"><label><input type="checkbox" name="flowers" value="A dozen roses"><span>A dozen roses</span></label><label><input type="checkbox" name="flowers" value="Two dozen roses"><span>Two dozen roses</span></label><label><input type="checkbox" name="flowers" value="Stargazer lily stems"><span>Stargazer lily stems</span></label><label><input type="checkbox" name="flowers" value="Gerbera daisies"><span>Gerbera daisies</span></label><label><input type="checkbox" name="flowers" value="Baby's breath bunch"><span>Baby's breath bunch</span></label><label><input type="checkbox" name="flowers" value="Mixed stems for a vase"><span>Mixed stems for a vase</span></label><label><input type="checkbox" name="flowers" value="Greenery and filler"><span>Greenery and filler</span></label><label><input type="checkbox" name="flowers" value="Something else" id="customToggle"><span>Something else</span></label></div></fieldset>
       <div class="f full" id="customWrap"><label for="custom">Which stems do you need?</label><textarea id="custom" name="custom" placeholder="Example: 30 pink roses and 2 bunches of baby's breath for table centerpieces"></textarea></div>
       <div class="f"><label for="colors">Colors</label><input id="colors" name="colors" placeholder="Pink and white, all red…"></div>
       <div class="f"><label for="ribbon">Ribbon lettering <span class="hint">optional</span></label><input id="ribbon" name="ribbon" placeholder="Te Amo, Happy 21st Bella…"></div>
       <div class="f full"><label for="get">Pickup or delivery</label>
         <select id="get" name="get"><option>Pickup in East LA</option><option>Delivery</option></select></div>
+      <div class="f full"><label for="photo">Inspiration photo <span class="hint">optional, up to 4, a look you love or a screenshot</span></label><input class="vh" id="photo" name="photo" type="file" accept="image/*" multiple><div class="photo-row"><div class="thumbs" id="thumbs" hidden></div><label class="photo-add" id="photoAdd" for="photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Add a photo</span></label><p class="hint" id="photoMax" hidden>4 photos max</p></div></div>
       <div class="f full"><label for="notes">Anything else</label><textarea id="notes" name="notes" placeholder="Inspiration, delivery area, a bouquet from our site you liked…"></textarea></div>
       <p class="deposit-note"><span class="star" aria-hidden="true"></span>A 20% deposit holds your date once you approve your quote.</p>
       <p class="error" id="err" role="alert" hidden></p>
@@ -64,8 +77,10 @@
         <h3>Your request is ready</h3>
         <p style="margin:0">Send it by text or Instagram and we'll reply with your quote. We copied it for you too.</p>
         <pre id="summary"></pre>
+        <p class="photo-note" id="photoNote" hidden><span class="star" aria-hidden="true"></span><span><b>Don't forget your photo.</b> When your text or Instagram chat opens, attach your inspiration photo before you send.</span></p>
         <div style="display:flex;flex-wrap:wrap;gap:10px">
           <a class="btn btn-pink" id="smsBtn" href="sms:+13238420960">Text it to us</a>
+          <button class="btn btn-ghost" type="button" id="shareBtn" hidden>Share with photo</button>
           <a class="btn btn-ghost" href="https://ig.me/m/floralsbyitalia" target="_blank" rel="noopener">Send on Instagram</a>
           <button class="btn btn-ghost" type="button" id="copyAgain">Copy request</button>
         </div>

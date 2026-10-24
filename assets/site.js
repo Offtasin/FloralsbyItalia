@@ -1,6 +1,27 @@
 (function(){
   var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* ---------- words the script writes, in English and Spanish ---------- */
+  var ES=document.documentElement.lang==='es',LOC=ES?'es-MX':'en-US';
+  var L=ES?{
+    vday:'San Valentín',mday:'Día de las Madres',today:'es hoy',tomorrow:'es mañana',is:'es el',
+    bookBy:function(d){return 'Reserva antes del '+d+', los lugares se llenan rápido.'},late:'Ya casi no hay lugares. Mándanos un mensaje para ver si queda alguno.',bookNow:'Reservar',textUs:'Escríbenos',
+    look:function(n){return 'Me encanta el ramo "'+n+'" de su página.'},
+    addPhoto:'Agregar foto',addAnother:'Agregar otra foto',maxPhotos:'Máximo 4 fotos',removePhoto:function(i){return 'Quitar foto '+i},
+    errName:'Escribe tu nombre.',errPhone:'Escribe un número de 10 dígitos, como 323-555-0100.',errDate:'Elige la fecha en que necesitas tu ramo.',
+    fix:function(n){return 'Corrige '+(n===1?'1 campo':n+' campos')+' arriba para continuar.'},
+    hello:'¡Hola Italia! Quiero un ramo personalizado.',name:'Nombre',phone:'Teléfono',insta:'Instagram',date:'Fecha',occasion:'Ocasión',size:'Tamaño',budget:'Presupuesto',flowers:'Flores',custom:'Mi ramo',colors:'Colores',ribbon:'Listón',get:'Recoger o entrega',notes:'Notas',notSure:'Todavía no sé',
+    photoLine:function(n){return 'Inspiración: '+(n===1?'Te mando mi foto':'Te mando '+n+' fotos')},copied:'Copiado'
+  }:{
+    vday:"Valentine's Day",mday:"Mother's Day",today:'is today',tomorrow:'is tomorrow',is:'is',
+    bookBy:function(d){return 'Book by '+d+', spots fill fast.'},late:'Spots are almost gone. Text us to check.',bookNow:'Book now',textUs:'Text us',
+    look:function(n){return 'I love the "'+n+'" bouquet from your site.'},
+    addPhoto:'Add a photo',addAnother:'Add another photo',maxPhotos:'4 photos max',removePhoto:function(i){return 'Remove photo '+i},
+    errName:'Enter your name.',errPhone:'Enter a 10-digit phone number, like 323-555-0100.',errDate:'Pick the date you need your bouquet.',
+    fix:function(n){return 'Fix '+(n===1?'1 field':n+' fields')+' above to continue.'},
+    hello:"Hi Italia! I'd like a custom bouquet.",name:'Name',phone:'Phone',insta:'Instagram',date:'Date',occasion:'Occasion',size:'Size',budget:'Budget',flowers:'Flowers',custom:'My custom bouquet',colors:'Colors',ribbon:'Ribbon',get:'Pickup or delivery',notes:'Notes',notSure:'Not sure yet',
+    photoLine:function(n){return 'Inspiration: '+(n===1?"I'll attach my photo":"I'll attach "+n+' photos')},copied:'Copied'
+  };
 
   /* ---------- nav, menu, action bar ---------- */
   var nav=$('#nav'),bar=$('#actionbar'),form=$('#orderForm');
@@ -24,11 +45,6 @@
     spy.forEach(function(a){var t=document.getElementById(a.dataset.spy);if(t)io.observe(t)});
   }
 
-  /* ---------- verification hooks for scroll-craft's screenshot tool (only with ?scverify) ---------- */
-  var SCV=/[?&]scverify/.test(location.search);
-  if(SCV){
-    $$('.sec-head h2, .sec-head p, .ph2 h1, .ph2-lede, .obj-head h2, .obj-label, .obj-text, .stack-head h2, .now h3, .now p, .cta-band h2, .cta-band p, .dates-head h3, .dates-head p, .faq2-head h2, .steps h3, .steps p, .glance-t tbody th, .glance-t td').forEach(function(el){el.setAttribute('data-sc-copy','')});
-  }
   /* ---------- sizes: the bouquet grows stem by stem as you scroll (signature) ---------- */
   // Wrap paper grows with the bouquet, and the flower head always sits on the cone.
   function posyShape(svg,n){
@@ -46,7 +62,6 @@
       blooms.forEach(function(b,i){b.classList.toggle('off',i>=n)});
       num.textContent=n>=100?'100+':n;
       posyShape(live,n);
-      if(SCV)live.closest('.posy-rail').setAttribute('data-sc-verify-state','stems:'+n);
     };
     var update=function(){
       var mid=innerHeight*.45,stems=+objs[0].dataset.stems,name=objs[0].querySelector('h2').textContent;
@@ -69,8 +84,27 @@
   var nextDate=function(fn){var t=new Date();t.setHours(0,0,0,0);var d=fn(t.getFullYear());return d>=t?d:fn(t.getFullYear()+1)};
   var mday=function(y){var d=new Date(y,4,1);d.setDate(1+((7-d.getDay())%7)+7);return d};
   var dates={vday:nextDate(function(y){return new Date(y,1,14)}),mday:nextDate(mday)};
-  $$('[data-date]').forEach(function(el){var d=dates[el.dataset.date];if(d)el.textContent=d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})});
-  $$('[data-by]').forEach(function(el){var d=dates[el.dataset.by];if(d){var b=new Date(d);b.setDate(b.getDate()-7);el.textContent=b.toLocaleDateString('en-US',{month:'short',day:'numeric'})}});
+  $$('[data-date]').forEach(function(el){var d=dates[el.dataset.date];if(d)el.textContent=d.toLocaleDateString(LOC,{weekday:'short',month:'short',day:'numeric'})});
+  var bookBy=function(d){var b=new Date(d);b.setDate(b.getDate()-7);return b};
+  $$('[data-by]').forEach(function(el){var d=dates[el.dataset.by];if(d)el.textContent=bookBy(d).toLocaleDateString(LOC,{month:ES?'long':'short',day:'numeric'})});
+
+  /* ---------- home: holiday banner in the 6 weeks before Valentine's Day and Mother's Day ---------- */
+  var promo=$('#promo');
+  if(promo){
+    var today=new Date();today.setHours(0,0,0,0);
+    [['vday',L.vday],['mday',L.mday]].some(function(h){
+      var day=dates[h[0]],by=bookBy(day),left=Math.round((day-today)/864e5);
+      if(left>42) return false;
+      var fmt=function(d,o){return d.toLocaleDateString(LOC,o)};
+      var mon=ES?'long':'short',when=left===0?L.today:left===1?L.tomorrow:L.is+' '+fmt(day,{weekday:'long',month:mon,day:'numeric'});
+      var early=today<=by;
+      $('#promoText').innerHTML='<b>'+h[1]+' '+when+'.</b> '+(early?L.bookBy(fmt(by,{month:mon,day:'numeric'})):L.late);
+      var cta=$('#promoCta');
+      if(early){cta.href='order.html?occasion='+encodeURIComponent(h[1]);cta.textContent=L.bookNow}
+      else{cta.href='sms:+13238420960';cta.textContent=L.textUs}
+      promo.hidden=false;return true;
+    });
+  }
 
   /* ---------- "Ask for this look" carries the bouquet name to the order page ---------- */
   document.addEventListener('click',function(e){
@@ -83,9 +117,38 @@
     var notes=$('#notes'),look=null;
     try{look=new URLSearchParams(location.search).get('look')}catch(err){}
     if(!look){try{look=localStorage.getItem('fbi-look')}catch(err){}}
-    if(look){notes.value='I love the "'+look+'" bouquet from your site.';try{localStorage.removeItem('fbi-look')}catch(err){}}
+    if(look){notes.value=L.look(look);try{localStorage.removeItem('fbi-look')}catch(err){}}
     var sizeParam=null;try{sizeParam=new URLSearchParams(location.search).get('size')}catch(err){}
-    if(sizeParam){$$('[name=size]',form).forEach(function(r){if(r.value.indexOf(sizeParam)===0)r.checked=true})}
+    if(sizeParam){$$('[name=size]',form).forEach(function(r){if(r.dataset.key===sizeParam)r.checked=true})}
+    var occParam=null;try{occParam=new URLSearchParams(location.search).get('occasion')}catch(err){}
+    if(occParam){$$('#occasion option').forEach(function(o){if(o.value===occParam)o.selected=true})}
+    /* inspiration photos: add up to 4, remove any with its × button */
+    var photo=$('#photo'),thumbs=$('#thumbs'),photoAdd=$('#photoAdd'),photoMax=$('#photoMax'),photos=[];
+    var drawPhotos=function(){
+      thumbs.innerHTML='';
+      photos.forEach(function(f,n){
+        var box=document.createElement('div'),i=document.createElement('img'),x=document.createElement('button');
+        box.className='thumb';i.alt='';i.src=URL.createObjectURL(f);i.onload=function(){URL.revokeObjectURL(i.src)};
+        x.type='button';x.className='thumb-x';x.setAttribute('aria-label',L.removePhoto(n+1));x.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>';
+        x.addEventListener('click',function(){
+          photos.splice(n,1);drawPhotos();
+          var next=thumbs.querySelectorAll('.thumb-x')[Math.min(n,photos.length-1)];(next||photo).focus();
+        });
+        box.appendChild(i);box.appendChild(x);thumbs.appendChild(box);
+      });
+      thumbs.hidden=!photos.length;
+      var full=photos.length>=4;
+      photoAdd.hidden=full;photo.disabled=full;photoMax.hidden=!full;
+      $('span',photoAdd).textContent=photos.length?L.addAnother:L.addPhoto;
+    };
+    photo.addEventListener('change',function(){
+      [].slice.call(photo.files||[]).forEach(function(f){
+        if(!/^image\//.test(f.type)||photos.length>=4) return;
+        if(photos.some(function(p){return p.name===f.name&&p.size===f.size})) return;
+        photos.push(f);
+      });
+      photo.value='';drawPhotos();
+    });
     var date=$('#date'),t=new Date();t.setDate(t.getDate()+2);date.min=t.toISOString().slice(0,10);
     var customToggle=$('#customToggle'),customWrap=$('#customWrap');
     customToggle.addEventListener('change',function(){customWrap.classList.toggle('show',customToggle.checked);if(customToggle.checked)$('#custom').focus()});
@@ -106,38 +169,45 @@
     };
     form.addEventListener('submit',function(e){
       e.preventDefault();
-      var checks=[['name',!val('name'),'Enter your name.'],
-                  ['phone',val('phone').replace(/\D/g,'').length<10,'Enter a 10-digit phone number, like 323-555-0100.'],
-                  ['date',!val('date'),'Pick the date you need your bouquet.']];
+      var checks=[['name',!val('name'),L.errName],
+                  ['phone',val('phone').replace(/\D/g,'').length<10,L.errPhone],
+                  ['date',!val('date'),L.errDate]];
       var bad=[];
       checks.forEach(function(c){setFieldError(c[0],c[1]?c[2]:'');if(c[1])bad.push(c[0])});
-      if(bad.length){err.textContent='Fix '+(bad.length===1?'1 field':bad.length+' fields')+' above to continue.';err.hidden=false;form.elements[bad[0]].focus();return}
+      if(bad.length){err.textContent=L.fix(bad.length);err.hidden=false;form.elements[bad[0]].focus();return}
       err.hidden=true;
       var flowers=$$('[name=flowers]:checked',form).map(function(i){return i.value}).join(', ');
-      var size=($('[name=size]:checked',form)||{}).value||'Not sure yet';
+      var size=($('[name=size]:checked',form)||{}).value||L.notSure;
       var d=new Date(val('date')+'T12:00:00');
+      var line=function(k,v){return v?L[k]+': '+v:''};
       var lines=[
-        "Hi Italia! I'd like a custom bouquet.",
-        'Name: '+val('name'),
-        'Phone: '+val('phone'),
-        val('insta')?'Instagram: '+val('insta'):'',
-        'Date: '+d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'}),
-        'Occasion: '+val('occasion'),
-        'Size: '+size,
-        'Budget: '+val('budget'),
-        flowers?'Flowers: '+flowers:'',
-        val('custom')?'My custom bouquet: '+val('custom'):'',
-        val('colors')?'Colors: '+val('colors'):'',
-        val('ribbon')?'Ribbon: '+val('ribbon'):'',
-        'Pickup or delivery: '+val('get'),
-        val('notes')?'Notes: '+val('notes'):''
+        L.hello,
+        line('name',val('name')),
+        line('phone',val('phone')),
+        line('insta',val('insta')),
+        line('date',d.toLocaleDateString(LOC,{weekday:'long',month:'long',day:'numeric'})),
+        line('occasion',val('occasion')),
+        line('size',size),
+        line('budget',val('budget')),
+        line('flowers',flowers),
+        line('custom',val('custom')),
+        line('colors',val('colors')),
+        line('ribbon',val('ribbon')),
+        line('get',val('get')),
+        line('notes',val('notes')),
+        photos.length?L.photoLine(photos.length):''
       ].filter(Boolean).join('\n');
       sum.textContent=lines;copy(lines);
       $('#smsBtn').href='sms:+13238420960?&body='+encodeURIComponent(lines);
+      $('#photoNote').hidden=!photos.length;
+      var share=$('#shareBtn'),canShare=false;
+      try{canShare=photos.length&&navigator.canShare&&navigator.canShare({files:photos,text:lines})}catch(e){}
+      share.hidden=!canShare;
+      share.onclick=function(){navigator.share({files:photos,text:lines}).catch(function(){})};
       done.hidden=false;
       done.scrollIntoView({block:'nearest',behavior:reduce?'auto':'smooth'});
     });
-    $('#copyAgain').addEventListener('click',function(){copy(sum.textContent);this.textContent='Copied'});
+    $('#copyAgain').addEventListener('click',function(){copy(sum.textContent);this.textContent=L.copied});
   }
 
   /* ---------- motion: the page is complete without it ---------- */
@@ -154,7 +224,6 @@
       gsap.set(soft,{autoAlpha:0});
       ScrollTrigger.batch(soft,{start:'top 92%',once:true,onEnter:function(b){gsap.to(b,{autoAlpha:1,duration:1,stagger:.1,ease:'power2.out',overwrite:true})}});
     }
-    if(SCV)document.documentElement.classList.add('sc-ready');
     return;
   }
   var mobile=matchMedia('(max-width:860px)').matches;
@@ -186,7 +255,7 @@
     var sizeEl=$('#stackSize'),barEl=$('#stackBar'),nm=$('#stackName'),mx=$('#stackMix'),ask=$('#stackAsk'),cur=0;
     var setActive=function(i){
       if(i===cur) return;cur=i;var s=scards[i];
-      sizeEl.textContent=s.dataset.size;if(SCV)document.querySelector('.stack-sec').setAttribute('data-sc-verify-state','card:'+i);
+      sizeEl.textContent=s.dataset.size;
       nm.textContent=s.dataset.name;mx.textContent=s.dataset.mix;
       ask.dataset.look=s.dataset.name;ask.href='order.html?look='+encodeURIComponent(s.dataset.name);
       gsap.fromTo('.now',{y:12,autoAlpha:0},{y:0,autoAlpha:1,duration:.5,ease:'power3.out',overwrite:true});
@@ -221,9 +290,4 @@
     gsap.fromTo(m,{yPercent:-5,scale:1.12},{yPercent:5,scale:1.12,ease:'none',scrollTrigger:{trigger:m.parentNode,start:'top bottom',end:'bottom top',scrub:true}});
   });
   addEventListener('load',function(){ScrollTrigger.refresh()});
-  if(SCV){
-    // acts are tagged after GSAP pins, so the pinned stack is measured on its full scroll length
-    $$('main > section').forEach(function(el){var pin=el.parentElement&&el.parentElement.classList.contains('pin-spacer');(pin?el.parentElement:el).setAttribute('data-sc-act',pin?'pin':'flow')});
-    document.documentElement.classList.add('sc-ready');
-  }
 })();
