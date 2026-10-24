@@ -362,3 +362,4 @@ a.size:hover .see{gap:10px}
 .sp-empty .star{width:34px;height:34px;animation:spin 14s linear infinite}
 .sp-empty p{margin:0;color:var(--muted);max-width:30ch}
 @media (max-width:860px){.size-grid{grid-template-columns:1fr}}
+@media (min-width:861px){.size-grid{align-items:start}.size-info{position:sticky;top:120px}}
