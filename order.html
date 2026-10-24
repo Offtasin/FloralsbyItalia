@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Order — Florals by Italia</title>
+<meta name="description" content="Request a custom bouquet from Florals by Italia. Quotes usually within a day.">
+<meta property="og:title" content="Order — Florals by Italia">
+<meta property="og:description" content="Request a custom bouquet from Florals by Italia. Quotes usually within a day.">
+<meta property="og:image" content="https://floralsbyitalia.vercel.app/assets/img/stargazer-pink-1400.webp">
+<meta name="theme-color" content="#FFF7FA">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon fill='%23E8457F' points='50,0 57,8 67,3 71,13 82,12 83,22 93,25 90,35 99,41 93,50 99,59 90,65 93,75 83,78 82,88 71,87 67,97 57,92 50,100 43,92 33,97 29,87 18,88 17,78 7,75 10,65 1,59 7,50 1,41 10,35 7,25 17,22 18,12 29,13 33,3 43,8'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="./"><i aria-hidden="true"></i><span>Florals <em>by</em> Italia</span></a>
+    <ul id="menu"><li><a href="./">Home</a></li><li><a href="bouquets.html">Bouquets</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="order.html" aria-current="page">Order</a></li></ul>
+    <div class="nav-r">
+      <a class="ig-chip" href="https://www.instagram.com/floralsbyitalia/" target="_blank" rel="noopener">Instagram</a>
+      <a class="btn btn-pink" href="order.html">Order now</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg></button>
+    </div>
+  </div>
+</header>
+<main id="main">
+<section class="page-head" aria-labelledby="pg-h">
+  <div class="wrap">
+    <div class="kicker"><span class="star" aria-hidden="true"></span>Quotes usually within a day</div>
+    <h1 id="pg-h">Start your <em>order</em></h1>
+    <p>Tell us what you're picturing. When you're done, text it to us or send it on Instagram, and we'll reply with your quote.</p>
+  </div>
+</section>
+
+<section class="sec band-blush" aria-label="Order form" style="padding-top:clamp(56px,7vw,96px)">
+  <div class="wrap order-grid">
+    <form id="orderForm" novalidate>
+      <div class="f"><label for="name">Your name <span class="req">*</span></label><input id="name" name="name" autocomplete="name" required></div>
+      <div class="f"><label for="phone">Phone number <span class="req">*</span></label><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(323) 555-0100" required></div>
+      <div class="f"><label for="insta">Instagram <span class="hint">optional</span></label><input id="insta" name="insta" placeholder="@yourname"></div>
+      <div class="f"><label for="date">Date you need it <span class="req">*</span></label><input id="date" name="date" type="date" required></div>
+      <div class="f"><label for="occasion">Occasion</label>
+        <select id="occasion" name="occasion"><option>Birthday</option><option>Anniversary</option><option>Valentine's Day</option><option>Mother's Day</option><option>Graduation</option><option>Quinceañera</option><option>Just because</option><option>Something else</option></select></div>
+      <div class="f"><label for="budget">Budget</label>
+        <select id="budget" name="budget"><option>$50–$100</option><option selected>$100–$150</option><option>$150–$250</option><option>$250+</option></select></div>
+      <fieldset class="f full"><legend>Size</legend><div class="chips"><label><input type="radio" name="size" value="Petite (10–12 stems, from $50)"><span>Petite</span></label><label><input type="radio" name="size" value="Classic (~25 stems, from $85)" checked><span>Classic</span></label><label><input type="radio" name="size" value="Signature (~50 stems, from $140)"><span>Signature</span></label><label><input type="radio" name="size" value="Grand (100+ stems, from $250)"><span>Grand</span></label><label><input type="radio" name="size" value="Not sure yet"><span>Not sure</span></label></div></fieldset>
+      <fieldset class="f full"><legend>Flowers they love <span class="hint">pick any</span></legend><div class="chips"><label><input type="checkbox" name="flowers" value="Roses"><span>Roses</span></label><label><input type="checkbox" name="flowers" value="Stargazer lilies"><span>Stargazer lilies</span></label><label><input type="checkbox" name="flowers" value="Gerberas"><span>Gerberas</span></label><label><input type="checkbox" name="flowers" value="Tulips"><span>Tulips</span></label><label><input type="checkbox" name="flowers" value="Carnations"><span>Carnations</span></label><label><input type="checkbox" name="flowers" value="Baby's breath"><span>Baby's breath</span></label><label><input type="checkbox" name="flowers" value="Surprise me"><span>Surprise me</span></label><label><input type="checkbox" name="flowers" value="Custom" id="customToggle"><span>Custom: I'll make my own</span></label></div></fieldset>
+      <div class="f full" id="customWrap"><label for="custom">Build your own bouquet</label><textarea id="custom" name="custom" placeholder="Example: 30 pink roses, 5 stargazers, baby's breath on the edges, black wrap"></textarea></div>
+      <div class="f"><label for="colors">Colors</label><input id="colors" name="colors" placeholder="Pink and white, all red…"></div>
+      <div class="f"><label for="ribbon">Ribbon lettering <span class="hint">optional</span></label><input id="ribbon" name="ribbon" placeholder="Te Amo, Happy 21st Bella…"></div>
+      <div class="f full"><label for="get">Pickup or delivery</label>
+        <select id="get" name="get"><option>Pickup in East LA</option><option>Delivery</option></select></div>
+      <div class="f full"><label for="notes">Anything else</label><textarea id="notes" name="notes" placeholder="Inspiration, delivery area, a bouquet from our site you liked…"></textarea></div>
+      <p class="deposit-note"><span class="star" aria-hidden="true"></span>A 20% deposit holds your date once you approve your quote.</p>
+      <p class="error" id="err" role="alert" hidden></p>
+      <div class="form-actions"><button class="btn btn-pink" type="submit">Review my request</button></div>
+      <div class="done" id="done" hidden aria-live="polite">
+        <h3>Your request is ready</h3>
+        <p style="margin:0">Send it by text or Instagram and we'll reply with your quote. We copied it for you too.</p>
+        <pre id="summary"></pre>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <a class="btn btn-pink" id="smsBtn" href="sms:+13238420960">Text it to us</a>
+          <a class="btn btn-ghost" href="https://ig.me/m/floralsbyitalia" target="_blank" rel="noopener">Send on Instagram</a>
+          <button class="btn btn-ghost" type="button" id="copyAgain">Copy request</button>
+        </div>
+      </div>
+    </form>
+    <aside class="contact-card" aria-labelledby="contact-h">
+      <h2 id="contact-h">Rather text?</h2>
+      <p>Send us a message with your date and what you're picturing.</p>
+      <p class="label">Phone</p>
+      <span class="num">323-842-0960</span>
+      <div class="contact-links">
+        <a class="btn" href="sms:+13238420960"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>Text us</a>
+        <a class="btn alt" href="https://www.instagram.com/floralsbyitalia/" target="_blank" rel="noopener">Instagram @floralsbyitalia</a>
+      </div>
+      <ul>
+        <li><span class="star" aria-hidden="true"></span>Pickup in East Los Angeles</li>
+        <li><span class="star" aria-hidden="true"></span>Delivery around LA</li>
+        <li><span class="star" aria-hidden="true"></span>20% deposit holds your date</li>
+      </ul>
+    </aside>
+  </div>
+</section>
+</main>
+<footer>
+  <div class="wrap">
+    <p class="big">Florals <em>by</em> Italia</p>
+    <div class="row">
+      <div><h4>Custom bouquets</h4>Made to order in East Los Angeles.<br>Pickup and local delivery.</div>
+      <div><h4>Contact</h4><span class="num">323-842-0960</span><br><a href="sms:+13238420960">Text us</a><br><a href="https://www.instagram.com/floralsbyitalia/" target="_blank" rel="noopener">Instagram @floralsbyitalia</a></div>
+      <div><h4>Pages</h4><ul><li><a href="./">Home</a></li><li><a href="bouquets.html">Bouquets</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="order.html">Order</a></li></ul></div>
+    </div>
+    <p style="font-size:13px;margin:36px 0 0;opacity:.7">© <span data-year></span> Florals by Italia</p>
+  </div>
+</footer>
+<div class="actionbar" id="actionbar">
+  <a class="btn btn-ghost" href="sms:+13238420960">Text us</a>
+  <a class="btn btn-pink" href="order.html">Start your order</a>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>
