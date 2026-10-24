@@ -77,8 +77,21 @@
   }
 
   /* ---------- motion: the page is complete without it ---------- */
-  if(reduce||!window.gsap||!window.ScrollTrigger) return;
+  if(!window.gsap||!window.ScrollTrigger) return;
   gsap.registerPlugin(ScrollTrigger);
+
+  // Reduced-motion setting (common on PCs with Windows animation effects off):
+  // keep gentle fades only, with no flying, spinning or pinned scrolling.
+  if(reduce){
+    if($('.hero')) gsap.from(['.wreath','.hero h1','[data-intro]'],{autoAlpha:0,duration:1.2,stagger:.15,ease:'power2.out'});
+    if($('.page-head')) gsap.from('.page-head > .wrap > *',{autoAlpha:0,duration:1,stagger:.12,ease:'power2.out'});
+    var soft=$$('[data-reveal],[data-rise]');
+    if(soft.length){
+      gsap.set(soft,{autoAlpha:0});
+      ScrollTrigger.batch(soft,{start:'top 92%',once:true,onEnter:function(b){gsap.to(b,{autoAlpha:1,duration:1,stagger:.1,ease:'power2.out',overwrite:true})}});
+    }
+    return;
+  }
   var mobile=matchMedia('(max-width:860px)').matches;
 
   // Home hero: the wreath blooms in, the bouquet opens inside it, the ribbon tags tie on.
