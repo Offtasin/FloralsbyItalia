@@ -333,3 +333,28 @@ footer .num{font-family:var(--display);font-size:28px;color:var(--white);line-he
 @keyframes bob{0%,100%{translate:0 0}50%{translate:0 -8px}}
 @keyframes wobble{0%,100%{rotate:0deg}50%{rotate:12deg}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* clickable size cards */
+a.size{display:block;text-decoration:none;color:inherit;cursor:pointer}
+.size .see{display:inline-flex;align-items:center;gap:6px;margin-top:18px;font-size:14px;font-weight:600;color:var(--rose);border-bottom:1.5px solid currentColor;padding-bottom:2px}
+.size.pop .see{color:var(--white)}
+a.size:hover .see{gap:10px}
+
+/* sizes page */
+.size-jump{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:30px}
+.size-jump a{background:var(--white);border:1px solid var(--line);border-radius:999px;padding:9px 20px;font-weight:600;font-size:15px;text-decoration:none;color:var(--ink);transition:background .2s,color .2s}
+.size-jump a:hover{background:var(--pink);color:var(--white);border-color:var(--pink)}
+.size-sec{scroll-margin-top:70px}
+.size-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(32px,6vw,88px);align-items:center}
+.size-info p{color:var(--muted);max-width:40ch;margin:0 0 28px}
+.size-info .size-meta{font-size:18px;color:var(--ink);margin:16px 0 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.size-meta b{font-family:var(--display);font-weight:400;font-size:34px;color:var(--pink)}
+.size-meta .dot{width:5px;height:5px;border-radius:50%;background:var(--petal)}
+.size-photos{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.sp{margin:0;border-radius:20px;overflow:hidden;background:var(--petal)}
+.sp img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover}
+.sp:first-child:nth-last-child(odd){grid-row:span 2}
+.sp-empty{grid-column:1/-1;min-height:260px;border-radius:24px;border:1.5px dashed var(--petal);background:color-mix(in srgb,var(--white) 60%,transparent);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;padding:32px}
+.sp-empty .star{width:34px;height:34px;animation:spin 14s linear infinite}
+.sp-empty p{margin:0;color:var(--muted);max-width:30ch}
+@media (max-width:860px){.size-grid{grid-template-columns:1fr}}

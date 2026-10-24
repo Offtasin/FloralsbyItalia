@@ -29,6 +29,8 @@
     try{look=new URLSearchParams(location.search).get('look')}catch(err){}
     if(!look){try{look=localStorage.getItem('fbi-look')}catch(err){}}
     if(look){notes.value='I love the "'+look+'" bouquet from your site.';try{localStorage.removeItem('fbi-look')}catch(err){}}
+    var sizeParam=null;try{sizeParam=new URLSearchParams(location.search).get('size')}catch(err){}
+    if(sizeParam){$$('[name=size]',form).forEach(function(r){if(r.value.indexOf(sizeParam)===0)r.checked=true})}
     var date=$('#date'),t=new Date();t.setDate(t.getDate()+2);date.min=t.toISOString().slice(0,10);
     var customToggle=$('#customToggle'),customWrap=$('#customWrap');
     customToggle.addEventListener('change',function(){customWrap.classList.toggle('show',customToggle.checked);if(customToggle.checked)$('#custom').focus()});
