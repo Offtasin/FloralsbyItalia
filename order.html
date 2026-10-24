@@ -16,6 +16,9 @@
 <meta property="og:site_name" content="Florals by Italia">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://floralsbyitalia.vercel.app/order.html">
+<link rel="alternate" hreflang="en" href="https://floralsbyitalia.vercel.app/order.html">
+<link rel="alternate" hreflang="es" href="https://floralsbyitalia.vercel.app/es/order.html">
+<link rel="alternate" hreflang="x-default" href="https://floralsbyitalia.vercel.app/order.html">
 <meta name="theme-color" content="#FFF7FA">
 <link rel="icon" type="image/png" href="assets/img/logo-64.png">
 <link rel="apple-touch-icon" href="assets/img/logo-192.png">
@@ -31,6 +34,7 @@
     <a class="brand" href="./"><img src="assets/img/logo-192.png" alt="" width="96" height="96"><span>Florals <em>by</em> Italia</span></a>
     <ul id="menu"><li><a href="./">Home</a></li><li><a href="bouquets.html">Bouquets</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="order.html" aria-current="page">Order</a></li></ul>
     <div class="nav-r">
+      <a class="lang" href="es/order.html" hreflang="es" lang="es" aria-label="Ver en español">ES</a>
       <a class="ig-chip" href="https://www.instagram.com/floralsbyitalia/" target="_blank" rel="noopener">Instagram</a>
       <a class="btn btn-pink" href="order.html">Order now</a>
       <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg></button>
@@ -57,7 +61,7 @@
         <select id="occasion" name="occasion"><option>Birthday</option><option>Anniversary</option><option>Valentine's Day</option><option>Mother's Day</option><option>Graduation</option><option>Quinceañera</option><option>Just because</option><option>Something else</option></select></div>
       <div class="f"><label for="budget">Budget</label>
         <select id="budget" name="budget"><option>$50–$100</option><option selected>$100–$150</option><option>$150–$250</option><option>$250+</option></select></div>
-      <fieldset class="f full"><legend>Size</legend><div class="chips"><label><input type="radio" name="size" data-size="Small" value="Small (10–12 stems, from $50)"><span>Small</span></label><label><input type="radio" name="size" data-size="Medium" value="Medium (~25 stems, from $85)" checked><span>Medium</span></label><label><input type="radio" name="size" data-size="Large" value="Large (~50 stems, from $140)"><span>Large</span></label><label><input type="radio" name="size" data-size="Grand" value="Grand (100+ stems, from $250)"><span>Grand</span></label><label><input type="radio" name="size" value="Just flowers (loose stems, no wrap)"><span>Just flowers</span></label><label><input type="radio" name="size" value="Not sure yet"><span>Not sure</span></label></div></fieldset>
+      <fieldset class="f full"><legend>Size</legend><div class="chips"><label><input type="radio" name="size" data-key="Small" value="Small (10–12 stems, from $50)"><span>Small</span></label><label><input type="radio" name="size" data-key="Medium" value="Medium (~25 stems, from $85)" checked><span>Medium</span></label><label><input type="radio" name="size" data-key="Large" value="Large (~50 stems, from $140)"><span>Large</span></label><label><input type="radio" name="size" data-key="Grand" value="Grand (100+ stems, from $250)"><span>Grand</span></label><label><input type="radio" name="size" value="Just flowers (loose stems, no wrap)"><span>Just flowers</span></label><label><input type="radio" name="size" value="Not sure yet"><span>Not sure</span></label></div></fieldset>
       <fieldset class="f full" id="justFlowers"><legend>Just flowers <span class="hint">loose stems, no wrap, to arrange yourself</span></legend><div class="chips"><label><input type="checkbox" name="flowers" value="A dozen roses"><span>A dozen roses</span></label><label><input type="checkbox" name="flowers" value="Two dozen roses"><span>Two dozen roses</span></label><label><input type="checkbox" name="flowers" value="Stargazer lily stems"><span>Stargazer lily stems</span></label><label><input type="checkbox" name="flowers" value="Gerbera daisies"><span>Gerbera daisies</span></label><label><input type="checkbox" name="flowers" value="Baby's breath bunch"><span>Baby's breath bunch</span></label><label><input type="checkbox" name="flowers" value="Mixed stems for a vase"><span>Mixed stems for a vase</span></label><label><input type="checkbox" name="flowers" value="Greenery and filler"><span>Greenery and filler</span></label><label><input type="checkbox" name="flowers" value="Something else" id="customToggle"><span>Something else</span></label></div></fieldset>
       <div class="f full" id="customWrap"><label for="custom">Which stems do you need?</label><textarea id="custom" name="custom" placeholder="Example: 30 pink roses and 2 bunches of baby's breath for table centerpieces"></textarea></div>
       <div class="f"><label for="colors">Colors</label><input id="colors" name="colors" placeholder="Pink and white, all red…"></div>

@@ -4,7 +4,7 @@
   /* ---------- words the script writes, in English and Spanish ---------- */
   var ES=document.documentElement.lang==='es',LOC=ES?'es-MX':'en-US';
   var L=ES?{
-    vday:'Día de San Valentín',mday:'Día de las Madres',today:'es hoy',tomorrow:'es mañana',is:'es el',
+    vday:'San Valentín',mday:'Día de las Madres',today:'es hoy',tomorrow:'es mañana',is:'es el',
     bookBy:function(d){return 'Reserva antes del '+d+', los lugares se llenan rápido.'},late:'Ya casi no hay lugares. Mándanos un mensaje para ver si queda alguno.',bookNow:'Reservar',textUs:'Escríbenos',
     look:function(n){return 'Me encanta el ramo "'+n+'" de su página.'},
     addPhoto:'Agregar foto',addAnother:'Agregar otra foto',maxPhotos:'Máximo 4 fotos',removePhoto:function(i){return 'Quitar foto '+i},
@@ -86,7 +86,7 @@
   var dates={vday:nextDate(function(y){return new Date(y,1,14)}),mday:nextDate(mday)};
   $$('[data-date]').forEach(function(el){var d=dates[el.dataset.date];if(d)el.textContent=d.toLocaleDateString(LOC,{weekday:'short',month:'short',day:'numeric'})});
   var bookBy=function(d){var b=new Date(d);b.setDate(b.getDate()-7);return b};
-  $$('[data-by]').forEach(function(el){var d=dates[el.dataset.by];if(d)el.textContent=bookBy(d).toLocaleDateString(LOC,{month:'short',day:'numeric'})});
+  $$('[data-by]').forEach(function(el){var d=dates[el.dataset.by];if(d)el.textContent=bookBy(d).toLocaleDateString(LOC,{month:ES?'long':'short',day:'numeric'})});
 
   /* ---------- home: holiday banner in the 6 weeks before Valentine's Day and Mother's Day ---------- */
   var promo=$('#promo');
@@ -96,9 +96,9 @@
       var day=dates[h[0]],by=bookBy(day),left=Math.round((day-today)/864e5);
       if(left>42) return false;
       var fmt=function(d,o){return d.toLocaleDateString(LOC,o)};
-      var when=left===0?L.today:left===1?L.tomorrow:L.is+' '+fmt(day,{weekday:'long',month:'short',day:'numeric'});
+      var mon=ES?'long':'short',when=left===0?L.today:left===1?L.tomorrow:L.is+' '+fmt(day,{weekday:'long',month:mon,day:'numeric'});
       var early=today<=by;
-      $('#promoText').innerHTML='<b>'+h[1]+' '+when+'.</b> '+(early?L.bookBy(fmt(by,{month:'short',day:'numeric'})):L.late);
+      $('#promoText').innerHTML='<b>'+h[1]+' '+when+'.</b> '+(early?L.bookBy(fmt(by,{month:mon,day:'numeric'})):L.late);
       var cta=$('#promoCta');
       if(early){cta.href='order.html?occasion='+encodeURIComponent(h[1]);cta.textContent=L.bookNow}
       else{cta.href='sms:+13238420960';cta.textContent=L.textUs}
@@ -119,7 +119,7 @@
     if(!look){try{look=localStorage.getItem('fbi-look')}catch(err){}}
     if(look){notes.value=L.look(look);try{localStorage.removeItem('fbi-look')}catch(err){}}
     var sizeParam=null;try{sizeParam=new URLSearchParams(location.search).get('size')}catch(err){}
-    if(sizeParam){$$('[name=size]',form).forEach(function(r){if(r.dataset.size===sizeParam)r.checked=true})}
+    if(sizeParam){$$('[name=size]',form).forEach(function(r){if(r.dataset.key===sizeParam)r.checked=true})}
     var occParam=null;try{occParam=new URLSearchParams(location.search).get('occasion')}catch(err){}
     if(occParam){$$('#occasion option').forEach(function(o){if(o.value===occParam)o.selected=true})}
     /* inspiration photos: add up to 4, remove any with its × button */

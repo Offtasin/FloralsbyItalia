@@ -548,3 +548,7 @@ input[aria-invalid="true"]{border-color:#A3122F;background:#FFF1F3}
 .nf-ctas{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px}
 .page-head .nf-text{margin:22px auto 0}
 .nf-text a{color:var(--rose);font-weight:600}
+
+/* language switch */
+.lang{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:0 10px;border:1px solid var(--line);border-radius:999px;font-size:14px;font-weight:600;letter-spacing:.04em;text-decoration:none;color:var(--ink);background:var(--white)}
+.lang:hover{border-color:var(--pink);color:var(--rose)}
