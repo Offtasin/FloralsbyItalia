@@ -79,16 +79,20 @@
   gsap.registerPlugin(ScrollTrigger);
   var mobile=matchMedia('(max-width:860px)').matches;
 
-  // Home hero: the arch opens from the bottom, lines rise, the ribbon ties across.
+  // Home hero: the wrap paper unfolds, the bouquet fills the head, the ribbon ties across.
   if($('.hero')){
     var tl=gsap.timeline({defaults:{ease:'power4.out'}});
-    tl.from('.arch .frame',{clipPath:'inset(100% 0% 0% 0% round 999px 999px 28px 28px)',duration:1.4,ease:'power4.inOut'},0)
-      .from('.arch video',{scale:1.25,duration:1.8},0)
+    tl.from('.bq .burst-paper',{scale:.5,rotation:-40,transformOrigin:'50% 37%',opacity:0,duration:1.4},0)
+      .from('.bq .cone',{scaleY:0,transformOrigin:'50% 0%',duration:1,ease:'power3.out'},.2)
+      .from('.bq .fold',{opacity:0,duration:.6},.9)
+      .from('.bq .head',{scale:.2,rotation:-30,opacity:0,duration:1.3,ease:'back.out(1.3)'},.35)
+      .from('.bq .flap',{scale:0,transformOrigin:'50% 0%',duration:.8,stagger:.12,ease:'back.out(1.6)'},.9)
       .from('.hero .hl__in',{yPercent:110,duration:1.15,stagger:.1},.3)
       .from('[data-intro]',{y:18,autoAlpha:0,duration:.9,stagger:.08},.6)
-      .from('.arch .ribbon',{clipPath:'inset(0 100% 0 0)',duration:1,ease:'power3.inOut'},1)
-      .from('.arch .sticker',{scale:0,rotation:-90,duration:.8,ease:'back.out(1.7)'},1.3);
-    gsap.to('.arch .frame',{yPercent:-6,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+      .from('.bq .ribbon',{clipPath:'inset(0 100% 0 0)',duration:1,ease:'power3.inOut'},1.1)
+      .from('.bq .sticker',{scale:0,rotation:-90,duration:.8,ease:'back.out(1.7)'},1.4);
+    gsap.to('.bq .head',{rotation:4,duration:5,yoyo:true,repeat:-1,ease:'sine.inOut',delay:2.5});
+    gsap.to('.bq',{yPercent:-6,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
   }
 
   // Inner page headers rise in.
