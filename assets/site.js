@@ -24,6 +24,41 @@
     spy.forEach(function(a){var t=document.getElementById(a.dataset.spy);if(t)io.observe(t)});
   }
 
+  /* ---------- sizes: the bouquet grows stem by stem as you scroll (signature) ---------- */
+  // Wrap paper grows with the bouquet, and the flower head always sits on the cone.
+  function posyShape(svg,n){
+    var k=Math.min(1,Math.sqrt(n/100)),drop=(1-k)*44;
+    var w=$('.wrap-back',svg),f=$('.blooms',svg);
+    if(w)w.style.transform='translateY('+drop.toFixed(1)+'px) scale('+(.2+.8*k).toFixed(3)+')';
+    if(f)f.style.transform='translateY('+drop.toFixed(1)+'px)';
+  }
+  var live=$('.posy-live');
+  if(live){
+    var blooms=$$('.bl',live),objs=$$('.obj'),num=$('#posyNum'),nameEl=$('#posyName'),wrapBack=$('.wrap-back',live),shown=-1;
+    var setCount=function(n){
+      n=Math.max(1,Math.min(blooms.length,Math.round(n)));
+      if(n===shown) return;shown=n;
+      blooms.forEach(function(b,i){b.classList.toggle('off',i>=n)});
+      num.textContent=n>=100?'100+':n;
+      posyShape(live,n);
+    };
+    var update=function(){
+      var mid=innerHeight*.45,stems=+objs[0].dataset.stems,name=objs[0].querySelector('h2').textContent;
+      for(var i=0;i<objs.length;i++){
+        var r=objs[i].getBoundingClientRect(),a=+objs[i].dataset.stems,b=objs[i+1]?+objs[i+1].dataset.stems:a+8;
+        if(r.top<=mid){
+          var t=Math.max(0,Math.min(1,((mid-r.top)/Math.max(1,r.height)-.6)/.4));
+          stems=a+(b-a)*t;name=objs[i].querySelector('h2').textContent;
+        }
+      }
+      setCount(stems);if(nameEl.textContent!==name)nameEl.textContent=name;
+    };
+    addEventListener('scroll',update,{passive:true});addEventListener('resize',update);update();
+  }
+
+  /* static bouquets (phones): show each size's own stem count */
+  $$('.posy-static').forEach(function(svg){var n=+svg.dataset.show;$$('.bl',svg).forEach(function(b,i){b.classList.toggle('off',i>=n)});posyShape(svg,n)});
+
   /* ---------- pricing: keep holiday dates current ---------- */
   var nextDate=function(fn){var t=new Date();t.setHours(0,0,0,0);var d=fn(t.getFullYear());return d>=t?d:fn(t.getFullYear()+1)};
   var mday=function(y){var d=new Date(y,4,1);d.setDate(1+((7-d.getDay())%7)+7);return d};
@@ -141,10 +176,10 @@
   if(scards.length){
     var n=scards.length;
     document.body.classList.add('pinned');
-    var num=$('#stackNum'),barEl=$('#stackBar'),nm=$('#stackName'),mx=$('#stackMix'),ask=$('#stackAsk'),cur=0;
+    var sizeEl=$('#stackSize'),barEl=$('#stackBar'),nm=$('#stackName'),mx=$('#stackMix'),ask=$('#stackAsk'),cur=0;
     var setActive=function(i){
       if(i===cur) return;cur=i;var s=scards[i];
-      num.textContent=String(i+1).padStart(2,'0');
+      sizeEl.textContent=s.dataset.size;
       nm.textContent=s.dataset.name;mx.textContent=s.dataset.mix;
       ask.dataset.look=s.dataset.name;ask.href='order.html?look='+encodeURIComponent(s.dataset.name);
       gsap.fromTo('.now',{y:12,autoAlpha:0},{y:0,autoAlpha:1,duration:.5,ease:'power3.out',overwrite:true});
@@ -160,6 +195,10 @@
     stl.to({},{duration:.4});
   }
 
+  // Gallery objects arrive with a clip wipe, once.
+  $$('[data-wipe] .sp-img').forEach(function(el){
+    gsap.fromTo(el,{clipPath:'inset(18% 0% 0% 0% round 20px)',opacity:.4},{clipPath:'inset(0% 0% 0% 0% round 20px)',opacity:1,duration:.9,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%',once:true}});
+  });
   // Headings rise; cards and tiles fade up in small batches.
   $$('[data-reveal]').forEach(function(h){
     gsap.from(h,{yPercent:40,autoAlpha:0,duration:1.1,ease:'power4.out',scrollTrigger:{trigger:h,start:'top 88%',once:true}});
